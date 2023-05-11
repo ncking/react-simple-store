@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "allowJs": true,
+      "jsx": "react",
+      "declaration": true,
+      "outDir": "dist",
+      "forceConsistentCasingInFileNames": true,
+      "experimentalDecorators": true,
+      "rootDirs": ["./src", "./types"],
+      "rootDir": "./src",
+      "typeRoots": [
+        "./node_modules/@types",
+        "./types"
+      ]
+    },
+    "include": ["src/**/*", "tests/**/*"],
+    "exclude": ["node_modules", "dist", "test/**/*"]
+  }
