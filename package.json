@@ -12,6 +12,7 @@
   "author": "n king",
   "license": "ISC",
   "private": false,
+  "source" : "./src/index.ts",
   "main": "./dist/react-simple-store.cjs",
   "module": "./dist/react-simple-store.esm.js",
   "unpkg": "./dist/react-simple-store.umd.js",
