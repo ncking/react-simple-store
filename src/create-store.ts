@@ -61,7 +61,7 @@ export const createStore = (
     return addListener(() => {
       const nextSelection = selector(state);
       if (
-        Object.is(prevSelection, nextSelection) || // selections not changed, simple ref comparison
+        Object.is(prevSelection, nextSelection) || // selections not changed, simple comparison
         (equalityFn && equalityFn(prevSelection, nextSelection)) // selections not equal via custom equality fn
       ) {
         return;
@@ -81,9 +81,7 @@ export const createStore = (
     useEffect(() => subscribeWithSelector(selector, setValue, equalityFn), []);
     return value;
   };
-
   //
-
   return {
     ...actions(setState, getState, { subscribe }),
     useStore,
