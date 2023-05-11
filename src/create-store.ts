@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  ActionsCreator,
   ListenerCallback,
   State,
   EqualityFn,
@@ -7,10 +8,12 @@ import {
   SetState,
   Selector,
   SelectorCallback,
+  SubscribeApi,
+  SubscribeUnbind,
 } from "./types";
 
 export const createStore = (
-  actions: Function,
+  actions: ActionsCreator,
   initialState: State = {},
   options: Options = {}
 ) => {
@@ -42,7 +45,7 @@ export const createStore = (
 
   const getState = () => state;
   const destroy = () => listeners.clear();
-  const addListener = (listener: ListenerCallback) => {
+  const addListener = (listener: ListenerCallback): SubscribeUnbind => {
     listeners.add(listener);
     return (): void => {
       listeners.delete(listener);
@@ -53,12 +56,12 @@ export const createStore = (
     selector: Selector,
     callback: SelectorCallback,
     equalityFn?: EqualityFn
-  ) => {
+  ): SubscribeUnbind => {
     let prevSelection = selector(state);
     return addListener(() => {
       const nextSelection = selector(state);
       if (
-        Object.is(prevSelection, nextSelection) || // selections not changed, simple comparison
+        Object.is(prevSelection, nextSelection) || // selections not changed, simple ref comparison
         (equalityFn && equalityFn(prevSelection, nextSelection)) // selections not equal via custom equality fn
       ) {
         return;
@@ -68,11 +71,7 @@ export const createStore = (
     });
   };
   //
-  const subscribe = (
-    selector: Selector,
-    callback?: SelectorCallback,
-    equalityFn?: EqualityFn
-  ) =>
+  const subscribe: SubscribeApi = (selector, callback?, equalityFn?) =>
     callback
       ? subscribeWithSelector(selector, callback, equalityFn)
       : addListener(selector as ListenerCallback);
