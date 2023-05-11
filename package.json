@@ -24,6 +24,10 @@
   "engines": {
     "node": ">=18"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "cross-env NODE_ENV=production microbundle --entry src/index.ts --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
     "clean": "rimraf lib dist coverage",
