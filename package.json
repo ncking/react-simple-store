@@ -35,7 +35,7 @@
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
     "prepare": "npm run clean && npm run build",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --verbose"
   },
   "peerDependencies": {
     "@types/react": "^16.8 || ^17.0 || ^18.0",

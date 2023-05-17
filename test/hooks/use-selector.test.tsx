@@ -3,9 +3,13 @@ import { render, fireEvent, act } from "@testing-library/react";
 import { recreateCounterStore } from "../fixtures";
 
 /**
- * Tests relavent to React
+ * Tests for React Hooks
  */
 let counterStore;
+beforeEach(() => {
+  counterStore = recreateCounterStore();
+});
+
 const ComponentUnderTest = () => {
   const count = counterStore.useStore((s) => s.count);
   return (
@@ -20,7 +24,6 @@ const ComponentUnderTest = () => {
 
 describe("react", () => {
   it("counterStore increment", () => {
-    counterStore = recreateCounterStore();
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
     fireEvent.click(getByText("+"));
@@ -28,7 +31,6 @@ describe("react", () => {
   });
 
   it("counterStore side-effect", async () => {
-    counterStore = recreateCounterStore();
     const { getByTestId } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
     act(() => counterStore.increment());
@@ -36,7 +38,6 @@ describe("react", () => {
   });
 
   it("counterStore side-effect settle first", async () => {
-    counterStore = recreateCounterStore();
     const { getByTestId } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
     act(() => {
