@@ -7,10 +7,11 @@ We have been using this in production for since 2020, mostly on React, SEO drive
 ## Motivation
 
 - Small bundle size ~0.5K zipped
-- Familliar api: similar to Redux, Zustand, Easy Peasy ...
+- Familliar api: similar to React-Redux, Zustand, Easy Peasy ...
 - No unessary features / barebones 
 - Extensable; if you need additional methods, just add to the store instance
-- Seperation of state & actions / reducers ... not combined into one object, makes it simple to mutate: slice or reset 
+- Seperation of state & actions / reducers ... not combined into one object, makes it simple to mutate: slice or reset
+- UseStore; selector instance is not recreated on each render. If your selector maintains state, use the options:{rebind} to force a new instance.
 
 
 
