@@ -35,10 +35,9 @@ describe("react", () => {
     counterStore = recreateCounterStore();
     const { getByTestId } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
-    act(() =>counterStore.increment());
+    act(() => counterStore.increment());
     expect(getByTestId("count").textContent).toEqual("1");
   });
-
 
   it("counterStore side-effect settle first", async () => {
     counterStore = recreateCounterStore();
