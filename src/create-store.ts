@@ -56,6 +56,7 @@ export const createStore = (
     selector: Selector,
     callback: SelectorCallback,
     equalityFn?: EqualityFn
+    // @TODO add options { rebind}
   ): SubscribeUnbind => {
     let prevSelection = selector(state);
     return addListener(() => {
@@ -71,10 +72,10 @@ export const createStore = (
     });
   };
   //
-  const subscribe: SubscribeApi = (selector, callback?, equalityFn?) =>
-    callback
-      ? subscribeWithSelector(selector, callback, equalityFn)
-      : addListener(selector as ListenerCallback);
+  const subscribe: SubscribeApi = (...args) =>
+    args[1]
+      ? subscribeWithSelector(...args as [Selector, SelectorCallback, EqualityFn])
+      : addListener(args[0] as ListenerCallback);
   //
   const useStore = (selector: Selector, equalityFn?: EqualityFn) => {
     const [value, setValue] = useState(selector(state));
