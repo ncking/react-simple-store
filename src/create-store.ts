@@ -74,8 +74,8 @@ export const createStore = (
   const subscribe: SubscribeApi = (...args) =>
     args[1]
       ? subscribeWithSelector(
-        ...(args as [Selector, SelectorCallback, EqualityFn])
-      )
+          ...(args as [Selector, SelectorCallback, EqualityFn])
+        )
       : addListener(args[0] as ListenerCallback);
   //
   const useStore = (
