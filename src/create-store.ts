@@ -56,7 +56,6 @@ export const createStore = (
     selector: Selector,
     callback: SelectorCallback,
     equalityFn?: EqualityFn
-    // @TODO add options { rebind}
   ): SubscribeUnbind => {
     let prevSelection = selector(state);
     return addListener(() => {
@@ -74,10 +73,12 @@ export const createStore = (
   //
   const subscribe: SubscribeApi = (...args) =>
     args[1]
-      ? subscribeWithSelector(...args as [Selector, SelectorCallback, EqualityFn])
+      ? subscribeWithSelector(
+          ...(args as [Selector, SelectorCallback, EqualityFn])
+        )
       : addListener(args[0] as ListenerCallback);
   //
-  const useStore = (selector: Selector, equalityFn?: EqualityFn) => {
+  const useStore = (selector: Selector, equalityFn?: EqualityFn) => {// @TODO add options { rebind} ... do we need this? any 
     const [value, setValue] = useState(selector(state));
     useEffect(() => subscribeWithSelector(selector, setValue, equalityFn), []);
     return value;
