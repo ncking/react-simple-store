@@ -3,11 +3,7 @@ import { render, fireEvent, act } from "@testing-library/react";
 import { recreateCounterStore } from "../fixtures";
 
 /**
- * Tests relavent to React* Hooks, not the stanadrd functionality
- *
- * 1. test actions
- * 2. test store changes
- * 3. test rebinding selector
+ * Tests relavent to React
  */
 let counterStore;
 const ComponentUnderTest = () => {
