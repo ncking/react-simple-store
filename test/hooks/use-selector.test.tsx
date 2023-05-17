@@ -35,11 +35,9 @@ describe("react", () => {
     counterStore = recreateCounterStore();
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
-    act(() => {
-      /* fire events that update state */
+    act(() => {/* fire events that update state */
       counterStore.increment();
     });
-   
     expect(getByTestId("count").textContent).toEqual("1");
   });
 });
