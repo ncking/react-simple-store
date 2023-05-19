@@ -87,14 +87,22 @@ export const createStore = (
     equalityFn?: EqualityFn,
     options?: { rebind: false }
   ) => {
-    // @TODO add rebind ... do we need this? any
-    const [value, setValue] = useState(selector(state));
+    const [{ value, rebind }, setValue] = useState({
+      value: selector(state),
+      rebind: !!options?.rebind,
+    });
     useEffect(
-      () => subscribeWithSelector(selector, setValue, equalityFn),
-      [options?.rebind && selector]
+      () =>
+        subscribeWithSelector(
+          selector,
+          (value: any) => setValue({ value, rebind }),
+          equalityFn
+        ),
+      rebind ? [selector] : []
     );
     return value;
   };
+
   //
   return {
     ...actions(setState, getState, { subscribe }),
