@@ -8,6 +8,7 @@ We have been using this in production for since 2020, mostly on React, SEO drive
 
 - Small bundle size ~0.5K zipped
 - Familliar api: similar to React-Redux, Zustand, Easy Peasy ...
+- State & sate partials must be objects
 - No unessary features / barebones 
 - Extensable; if you need additional methods, just add to the store instance
 - Seperation of state & actions / reducers ... not combined into one object, makes it simple to mutate: slice or reset

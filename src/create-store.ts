@@ -28,14 +28,13 @@ export const createStore = (
     }
     try {
       isDispatching = true;
-      const nextState =
-        typeof partial === "function" ? partial(state) : partial;
+      const nextState = typeof partial === "function" ? partial(state) : partial;
       if (!Object.is(nextState, state)) {
+        if (typeof nextState !== "object") {
+          throw new Error("next state not object");
+        }
         const previousState = state;
-        state =
-          replace ?? typeof nextState !== "object"
-            ? nextState
-            : { ...state, ...nextState };
+        state = replace ? nextState : { ...state, ...nextState };
         listeners.forEach((listener) => listener(state, previousState));
       }
     } finally {
@@ -60,10 +59,10 @@ export const createStore = (
     let prevSelection = selector(state);
     return addListener(() => {
       const nextSelection = selector(state);
-      if (
-        Object.is(prevSelection, nextSelection) || // selections not changed, simple comparison
-        (equalityFn && equalityFn(prevSelection, nextSelection)) // selections not equal via custom equality fn
-      ) {
+      /**
+       * If we have an equality fn, this takes priority otherwise it could match on ref
+       */
+      if (equalityFn ? equalityFn(prevSelection, nextSelection) : Object.is(prevSelection, nextSelection)) {
         return;
       }
       prevSelection = nextSelection;
@@ -74,8 +73,8 @@ export const createStore = (
   const subscribe: SubscribeApi = (...args) =>
     args[1]
       ? subscribeWithSelector(
-          ...(args as [Selector, SelectorCallback, EqualityFn])
-        )
+        ...(args as [Selector, SelectorCallback, EqualityFn])
+      )
       : addListener(args[0] as ListenerCallback);
   //
   const useStore = (
