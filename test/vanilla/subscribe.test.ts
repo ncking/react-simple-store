@@ -2,8 +2,9 @@ import { recreateCounterStore } from "../fixtures";
 
 let subscribe;
 let setState;
+let increment
 beforeEach(() => {
-  ({ subscribe, setState } = recreateCounterStore());
+  ({ subscribe, setState, increment } = recreateCounterStore());
 });
 
 describe("subscribe()", () => {
@@ -49,5 +50,15 @@ describe("subscribe()", () => {
     );
     setState({ dummy2: Date.now() });
     expect(spy).toHaveBeenCalled();
+  });
+
+  it("should unsubscribe", () => {
+    const spy = jest.fn();
+    const unsub = subscribe( s => s.count, spy);
+    increment()
+    unsub()
+    increment()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(1, 0)
   });
 });

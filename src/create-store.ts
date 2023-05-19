@@ -70,16 +70,16 @@ export const createStore = (
       ) {
         return;
       }
-      prevSelection = nextSelection;
       callback(nextSelection, prevSelection);
+      prevSelection = nextSelection;
     });
   };
   //
   const subscribe: SubscribeApi = (...args) =>
     args[1]
       ? subscribeWithSelector(
-          ...(args as [Selector, SelectorCallback, EqualityFn])
-        )
+        ...(args as [Selector, SelectorCallback, EqualityFn])
+      )
       : addListener(args[0] as ListenerCallback);
   //
   const useStore = (
