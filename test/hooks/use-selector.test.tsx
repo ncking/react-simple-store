@@ -48,4 +48,8 @@ describe("react", () => {
     });
     expect(getByTestId("count").textContent).toEqual("4");
   });
+
+  it("should rebind on selector change", async () => {});
+
+  it("should not rebind on selector change", async () => {});
 });
