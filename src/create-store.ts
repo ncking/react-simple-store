@@ -82,6 +82,19 @@ export const createStore = (
         )
       : addListener(args[0] as ListenerCallback);
   //
+  // const useStore = (
+  //   selector: Selector,
+  //   equalityFn?: EqualityFn,
+  //   options?: { rebind: false }
+  // ) => {
+  //   // @TODO add rebind ... do we need this? any
+  //   const [value, setValue] = useState(selector(state));
+  //   useEffect(
+  //     () => subscribeWithSelector(selector, setValue, equalityFn),
+  //     [options?.rebind && selector]
+  //   );
+  //   return value;
+  // };
   const useStore = (
     selector: Selector,
     equalityFn?: EqualityFn,

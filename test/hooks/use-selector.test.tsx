@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import { recreateCounterStore } from "../fixtures";
 
@@ -10,8 +10,10 @@ beforeEach(() => {
   counterStore = recreateCounterStore();
 });
 
-const ComponentUnderTest = () => {
-  const count = counterStore.useStore((s) => s.count);
+const ComponentUnderTest = (props) => {
+  const { selector = (s) => s.count, options } = props;
+  const count = counterStore.useStore(selector, null, options);
+
   return (
     <div>
       <div data-testid="count">{count}</div>
@@ -39,7 +41,6 @@ describe("react", () => {
 
   it("counterStore side-effect settle first", async () => {
     const { getByTestId } = render(<ComponentUnderTest />);
-    expect(getByTestId("count").textContent).toEqual("0");
     act(() => {
       counterStore.increment();
       counterStore.increment();
@@ -49,7 +50,25 @@ describe("react", () => {
     expect(getByTestId("count").textContent).toEqual("4");
   });
 
-  it("should rebind on selector change", async () => {});
+  it("should rebind on selector change", async () => {
+    const { rerender, getByTestId } = render(
+      <ComponentUnderTest options={{ rebind: true }} />
+    );
+    expect(getByTestId("count").textContent).toEqual("0");
+    rerender(<ComponentUnderTest selector={(s) => 0} />);
+    act(() => {
+      counterStore.increment();
+    });
+    expect(getByTestId("count").textContent).toEqual("0");
+  });
 
-  it("should not rebind on selector change", async () => {});
+  it("should not rebind on selector change", async () => {
+    const { rerender, getByTestId } = render(<ComponentUnderTest />);
+    expect(getByTestId("count").textContent).toEqual("0");
+    rerender(<ComponentUnderTest selector={(s) => 0} />);
+    act(() => {
+      counterStore.increment();
+    });
+    expect(getByTestId("count").textContent).toEqual("1");
+  });
 });
