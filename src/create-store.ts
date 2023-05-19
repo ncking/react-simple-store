@@ -48,8 +48,8 @@ export const createStore = (
   const addListener = (listener: ListenerCallback): SubscribeUnbind => {
     listeners.add(listener);
     return (): void => {
-      listeners.delete(listener);
-    }; //@NK TS: React.Destructor must return void, so cant use implicit return, as :delete returns boolean
+      listeners.delete(listener);//@NK TS: React.Destructor must return void, so cant use implicit return, as :delete returns boolean
+    };
   };
 
   const subscribeWithSelector = (
@@ -78,23 +78,10 @@ export const createStore = (
   const subscribe: SubscribeApi = (...args) =>
     args[1]
       ? subscribeWithSelector(
-          ...(args as [Selector, SelectorCallback, EqualityFn])
-        )
+        ...(args as [Selector, SelectorCallback, EqualityFn])
+      )
       : addListener(args[0] as ListenerCallback);
   //
-  // const useStore = (
-  //   selector: Selector,
-  //   equalityFn?: EqualityFn,
-  //   options?: { rebind: false }
-  // ) => {
-  //   // @TODO add rebind ... do we need this? any
-  //   const [value, setValue] = useState(selector(state));
-  //   useEffect(
-  //     () => subscribeWithSelector(selector, setValue, equalityFn),
-  //     [options?.rebind && selector]
-  //   );
-  //   return value;
-  // };
   const useStore = (
     selector: Selector,
     equalityFn?: EqualityFn,
