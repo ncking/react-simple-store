@@ -2,7 +2,7 @@ import { recreateCounterStore } from "../fixtures";
 
 let subscribe;
 let setState;
-let increment
+let increment;
 beforeEach(() => {
   ({ subscribe, setState, increment } = recreateCounterStore());
 });
@@ -54,11 +54,11 @@ describe("subscribe()", () => {
 
   it("should unsubscribe", () => {
     const spy = jest.fn();
-    const unsub = subscribe( s => s.count, spy);
-    increment()
-    unsub()
-    increment()
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(spy).toHaveBeenCalledWith(1, 0)
+    const unsub = subscribe((s) => s.count, spy);
+    increment();
+    unsub();
+    increment();
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(1, 0);
   });
 });
