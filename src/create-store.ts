@@ -28,7 +28,8 @@ export const createStore = (
     }
     try {
       isDispatching = true;
-      const nextState = typeof partial === "function" ? partial(state) : partial;
+      const nextState =
+        typeof partial === "function" ? partial(state) : partial;
       if (!Object.is(nextState, state)) {
         if (typeof nextState !== "object") {
           throw new Error("next state not object");
@@ -62,7 +63,11 @@ export const createStore = (
       /**
        * If we have an equality fn, this takes priority otherwise it could match on ref
        */
-      if (equalityFn ? equalityFn(prevSelection, nextSelection) : Object.is(prevSelection, nextSelection)) {
+      if (
+        equalityFn
+          ? equalityFn(prevSelection, nextSelection)
+          : Object.is(prevSelection, nextSelection)
+      ) {
         return;
       }
       prevSelection = nextSelection;
@@ -73,8 +78,8 @@ export const createStore = (
   const subscribe: SubscribeApi = (...args) =>
     args[1]
       ? subscribeWithSelector(
-        ...(args as [Selector, SelectorCallback, EqualityFn])
-      )
+          ...(args as [Selector, SelectorCallback, EqualityFn])
+        )
       : addListener(args[0] as ListenerCallback);
   //
   const useStore = (
