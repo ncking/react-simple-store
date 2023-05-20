@@ -37,3 +37,10 @@ export type UseStoreApi =(
   equalityFn?: EqualityFn,
   rebind?: boolean
 ) => void
+
+
+export type CreateSelectorListnerApi =(
+  selector: Selector,
+  callback: SelectorCallback,
+  equalityFn?: EqualityFn
+) => SubscribeUnbind

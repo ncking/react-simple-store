@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   ActionsCreator,
   ListenerCallback,
@@ -10,7 +10,8 @@ import {
   SelectorCallback,
   SubscribeApi,
   SubscribeUnbind,
-  UseStoreApi
+  UseStoreApi,
+  CreateSelectorListnerApi
 } from "./types";
 
 export const createStore = (
@@ -19,7 +20,7 @@ export const createStore = (
   options: Options = {}
 ) => {
   let isDispatching = false;
-  let stateId
+  let currentStateId: any
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
   const { allowNested = true } = options;
@@ -38,6 +39,7 @@ export const createStore = (
         }
         const previousState = state;
         state = replace ? nextState : { ...state, ...nextState };
+        currentStateId = Date.now()
         listeners.forEach((listener) => listener(state, previousState));
       }
     } finally {
@@ -54,16 +56,9 @@ export const createStore = (
     };
   };
 
-  const createSelectorListner = (
-    selector: Selector,
-    callback: SelectorCallback,
-    equalityFn?: EqualityFn
-  ): SubscribeUnbind => {
+  const createSelectorListner: CreateSelectorListnerApi = (selector, callback, equalityFn) => {
     let prevSelection = selector(state);
-    let lastSeenId: any
     return () => {
-      if (lastSeenId === stateId) return
-      lastSeenId = stateId
       const nextSelection = selector(state);
       /**
        * If we have an equality fn, this takes priority otherwise it could match on ref
@@ -85,20 +80,26 @@ export const createStore = (
     addListener(args[1] ? createSelectorListner(...(args as [Selector, SelectorCallback, EqualityFn])) : args[0]);
   //
   const useStore: UseStoreApi = (selector, equalityFn, rebind) => {
-    const [{ v, r }, setValue] = useState({ v: selector(state), r: rebind });
+    const instRef = useRef([rebind, currentStateId])
+    const [{ v }, setValue] = useState({ v: selector(state) }); // use obj when setting state, otherwise it may match on ref
+    const [r, initStateId] = instRef.current
     /**
+     * Now we have useSyncExternalStoreWithSelector ... avalible, which
+     * performs the same operation
+     * 
      * So between the useState() setup & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
-     * or call the listner() to check for an update
+     * or call the listner() to check for an update ... not perfect
      */
     useEffect(
       () => {
         const listner = createSelectorListner(
           selector,
-          (v: any) => setValue({ v, r }),
+          (v: any) => setValue({ v }),
           equalityFn
         );
-        listner();
+        (initStateId && (initStateId !== currentStateId)) && listner();
+        instRef.current[1] = null
         return addListener(listner);
       },
       r ? [selector] : []
