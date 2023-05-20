@@ -84,12 +84,14 @@ export const createStore = (
     const [{ v }, setValue] = useState({ v: selector(state) }); // use obj when setting state, otherwise it may match on ref
     const [r, initStateId] = instRef.current
     /**
-     * Now we have useSyncExternalStoreWithSelector ... avalible, which
+     * Now we have useSyncExternalStoreWithSelector avalible, which
      * performs the same operation
      * 
-     * So between the useState() setup & creating listners in useEffect, the state could of changed...
+     * Between the useState() setup & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
-     * or call the listner() to check for an update ... not perfect
+     * or call the listner() to check for an update ... we try to shortcut this by comparing the origial & current stateId
+     * 
+     * @TODO The assumption is useEffect destruct & reinit is sync ... we need to check this
      */
     useEffect(
       () => {
