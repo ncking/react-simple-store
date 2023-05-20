@@ -31,16 +31,14 @@ export type Options = {
   allowNested?: boolean;
 };
 
-
-export type UseStoreApi =(
+export type UseStoreApi = (
   selector: Selector,
   equalityFn?: EqualityFn,
   rebind?: boolean
-) => void
+) => void;
 
-
-export type CreateSelectorListnerApi =(
+export type CreateSelectorListnerApi = (
   selector: Selector,
   callback: SelectorCallback,
   equalityFn?: EqualityFn
-) => SubscribeUnbind
+) => SubscribeUnbind;

@@ -11,7 +11,7 @@ import {
   SubscribeApi,
   SubscribeUnbind,
   UseStoreApi,
-  CreateSelectorListnerApi
+  CreateSelectorListnerApi,
 } from "./types";
 
 export const createStore = (
@@ -20,7 +20,7 @@ export const createStore = (
   options: Options = {}
 ) => {
   let isDispatching = false;
-  let currentStateId: any
+  let currentStateId: any; // only used for init checks in React hooks
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
   const { allowNested = true } = options;
@@ -39,7 +39,7 @@ export const createStore = (
         }
         const previousState = state;
         state = replace ? nextState : { ...state, ...nextState };
-        currentStateId = Date.now()
+        currentStateId = performance.now();
         listeners.forEach((listener) => listener(state, previousState));
       }
     } finally {
@@ -56,7 +56,11 @@ export const createStore = (
     };
   };
 
-  const createSelectorListner: CreateSelectorListnerApi = (selector, callback, equalityFn) => {
+  const createSelectorListner: CreateSelectorListnerApi = (
+    selector,
+    callback,
+    equalityFn
+  ) => {
     let prevSelection = selector(state);
     return () => {
       const nextSelection = selector(state);
@@ -77,20 +81,26 @@ export const createStore = (
   };
   //
   const subscribe: SubscribeApi = (...args) =>
-    addListener(args[1] ? createSelectorListner(...(args as [Selector, SelectorCallback, EqualityFn])) : args[0]);
+    addListener(
+      args[1]
+        ? createSelectorListner(
+            ...(args as [Selector, SelectorCallback, EqualityFn])
+          )
+        : args[0]
+    );
   //
-  const useStore: UseStoreApi = (selector, equalityFn, rebind) => {
-    const instRef = useRef([rebind, currentStateId])
+  const useStore: UseStoreApi = (selector, equalityFn, rebind = false) => {
+    const instRef = useRef<[boolean, any]>([rebind, currentStateId!]);
     const [{ v }, setValue] = useState({ v: selector(state) }); // use obj when setting state, otherwise it may match on ref
-    const [r, initStateId] = instRef.current
+    const [r, initStateId] = instRef.current;
     /**
      * Now we have useSyncExternalStoreWithSelector avalible, which
      * performs the same operation
-     * 
+     *
      * Between the useState() setup & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
      * or call the listner() to check for an update ... we try to shortcut this by comparing the origial & current stateId
-     * 
+     *
      * @TODO The assumption is useEffect destruct & reinit is sync ... we need to check this
      */
     useEffect(
@@ -100,8 +110,7 @@ export const createStore = (
           (v: any) => setValue({ v }),
           equalityFn
         );
-        (initStateId && (initStateId !== currentStateId)) && listner();
-        instRef.current[1] = null
+        initStateId !== currentStateId && listner();
         return addListener(listner);
       },
       r ? [selector] : []
