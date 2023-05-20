@@ -21,4 +21,4 @@ export type Options = {
     allowNested?: boolean;
 };
 export type UseStoreApi = (selector: Selector, equalityFn?: EqualityFn, rebind?: boolean) => void;
-export type CreateSelectorListnerApi = (selector: Selector, callback: SelectorCallback, equalityFn?: EqualityFn) => SubscribeUnbind;
+export type CreateSelectorListnerApi = (selector: Selector, callback: SelectorCallback, equalityFn?: EqualityFn, initialReactHookValue?: any) => () => void;

@@ -40,5 +40,6 @@ export type UseStoreApi = (
 export type CreateSelectorListnerApi = (
   selector: Selector,
   callback: SelectorCallback,
-  equalityFn?: EqualityFn
-) => SubscribeUnbind;
+  equalityFn?: EqualityFn,
+  initialReactHookValue?: any
+) => () => void;

@@ -20,7 +20,6 @@ export const createStore = (
   options: Options = {}
 ) => {
   let isDispatching = false;
-  let currentStateId: any; // only used for init checks in React hooks
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
   const { allowNested = true } = options;
@@ -39,7 +38,6 @@ export const createStore = (
         }
         const previousState = state;
         state = replace ? nextState : { ...state, ...nextState };
-        currentStateId = performance.now();
         listeners.forEach((listener) => listener(state, previousState));
       }
     } finally {
@@ -59,9 +57,10 @@ export const createStore = (
   const createSelectorListner: CreateSelectorListnerApi = (
     selector,
     callback,
-    equalityFn
+    equalityFn,
+    initialReactHookValue = selector(state)
   ) => {
-    let prevSelection = selector(state);
+    let prevSelection = initialReactHookValue;
     return () => {
       const nextSelection = selector(state);
       /**
@@ -90,27 +89,29 @@ export const createStore = (
     );
   //
   const useStore: UseStoreApi = (selector, equalityFn, rebind = false) => {
-    const instRef = useRef<[boolean, any]>([rebind, currentStateId!]);
-    const [{ v }, setValue] = useState({ v: selector(state) }); // use obj when setting state, otherwise it may match on ref
-    const [r, initStateId] = instRef.current;
+    const [{ v, r }, setValue] = useState({ v: selector(state), r: !!rebind }); // use obj when setting state, otherwise it may match on ref
     /**
      * Now we have useSyncExternalStoreWithSelector avalible, which
-     * performs the same operation
+     * performs a similar funtion: setSate on store change, with equality fn
      *
-     * Between the useState() setup & creating listners in useEffect, the state could of changed...
+     * Between the call to useState() & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
-     * or call the listner() to check for an update ... we try to shortcut this by comparing the origial & current stateId
+     * or call the listner() , with our current state value to check for an update ...
+     * we could also do this with an in scope store update key (Symbol()),
+     *
      *
      * @TODO The assumption is useEffect destruct & reinit is sync ... we need to check this
      */
     useEffect(
       () => {
+        // so count in now 2
         const listner = createSelectorListner(
           selector,
-          (v: any) => setValue({ v }),
-          equalityFn
+          (v: any) => setValue({ v, r }),
+          equalityFn,
+          v
         );
-        initStateId !== currentStateId && listner();
+        listner(); /// run check that our value hasnt changed between the UseStoreApi() call & useEffect call
         return addListener(listner);
       },
       r ? [selector] : []
