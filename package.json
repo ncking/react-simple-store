@@ -12,16 +12,21 @@
   "author": "n king",
   "license": "ISC",
   "private": false,
-  "source": "./src/index.ts",
-  "main": "./dist/react-simple-store.cjs",
-  "module": "./dist/react-simple-store.esm.js",
-  "unpkg": "./dist/react-simple-store.umd.js",
-  "types": "./dist/index.d.ts",
   "homepage": "https://github.com/ncking/react-simple-store",
   "repository": "github:ncking/react-simple-store",
   "bugs": "https://github.com/ncking/react-simple-store/issues",
   "type": "module",
   "sideEffects": false,
+  "source": "./src/index.ts",
+  "main": "./dist/react-simple-store.cjs",
+  "module": "./dist/react-simple-store.esm.js",
+  "unpkg": "./dist/react-simple-store.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/react-simple-store.cjs",
+    "default": "./dist/react-simple-store.esm.js"
+  },
   "engines": {
     "node": ">=18"
   },
@@ -30,7 +35,7 @@
     "src"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production microbundle --entry src/index.ts --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
+    "build": "cross-env NODE_ENV=production microbundle --entry src/index.ts --raw --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
     "clean": "rimraf lib dist coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
