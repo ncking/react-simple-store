@@ -30,3 +30,10 @@ export interface Action extends ActionSimple {
 export type Options = {
   allowNested?: boolean;
 };
+
+
+export type UseStoreApi =(
+  selector: Selector,
+  equalityFn?: EqualityFn,
+  rebind?: boolean
+) => void

@@ -10,6 +10,7 @@ import {
   SelectorCallback,
   SubscribeApi,
   SubscribeUnbind,
+  UseStoreApi
 } from "./types";
 
 export const createStore = (
@@ -18,6 +19,7 @@ export const createStore = (
   options: Options = {}
 ) => {
   let isDispatching = false;
+  let stateId
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
   const { allowNested = true } = options;
@@ -48,20 +50,24 @@ export const createStore = (
   const addListener = (listener: ListenerCallback): SubscribeUnbind => {
     listeners.add(listener);
     return (): void => {
-      listeners.delete(listener);//@NK TS: React.Destructor must return void, so cant use implicit return, as :delete returns boolean
+      listeners.delete(listener); //@NK TS: React.Destructor must return void, so cant use implicit return, as :delete returns boolean
     };
   };
 
-  const subscribeWithSelector = (
+  const createSelectorListner = (
     selector: Selector,
     callback: SelectorCallback,
     equalityFn?: EqualityFn
   ): SubscribeUnbind => {
     let prevSelection = selector(state);
-    return addListener(() => {
+    let lastSeenId: any
+    return () => {
+      if (lastSeenId === stateId) return
+      lastSeenId = stateId
       const nextSelection = selector(state);
       /**
        * If we have an equality fn, this takes priority otherwise it could match on ref
+       * on nested mutations
        */
       if (
         equalityFn
@@ -72,35 +78,32 @@ export const createStore = (
       }
       callback(nextSelection, prevSelection);
       prevSelection = nextSelection;
-    });
+    };
   };
   //
   const subscribe: SubscribeApi = (...args) =>
-    args[1]
-      ? subscribeWithSelector(
-        ...(args as [Selector, SelectorCallback, EqualityFn])
-      )
-      : addListener(args[0] as ListenerCallback);
+    addListener(args[1] ? createSelectorListner(...(args as [Selector, SelectorCallback, EqualityFn])) : args[0]);
   //
-  const useStore = (
-    selector: Selector,
-    equalityFn?: EqualityFn,
-    options?: { rebind: false }
-  ) => {
-    const [{ value, rebind }, setValue] = useState({
-      value: selector(state),
-      rebind: !!options?.rebind,
-    });
+  const useStore: UseStoreApi = (selector, equalityFn, rebind) => {
+    const [{ v }, setValue] = useState({ v: selector(state) });
+    /**
+     * So between the useState() setup & creating listners in useEffect, the state could of changed...
+     * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
+     * or call the listner() to check for an update
+     */
     useEffect(
-      () =>
-        subscribeWithSelector(
+      () => {
+        const listner = createSelectorListner(
           selector,
-          (value: any) => setValue({ value, rebind }),
+          (v: any) => setValue({ v }),
           equalityFn
-        ),
+        );
+        listner();
+        return addListener(listner);
+      },
       rebind ? [selector] : []
     );
-    return value;
+    return v;
   };
 
   //

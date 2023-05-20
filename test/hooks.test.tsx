@@ -71,4 +71,40 @@ describe("react", () => {
     });
     expect(getByTestId("count").textContent).toEqual("1");
   });
+
+
+
+  it("state consistant selector change", async () => {
+
+    const ComponentUnderTest = () => {
+      const count = counterStore.useStore(s => s.count);
+      counterStore.increment()
+      counterStore.increment()
+      counterStore.increment()
+      return (
+        <div>
+          <div data-testid="count">{count}</div>
+          <button type="button" onClick={counterStore.increment}>
+            +
+          </button>
+        </div>
+      );
+    };
+
+    const { rerender, getByTestId } = render(<ComponentUnderTest />);
+    expect(getByTestId("count").textContent).toEqual("0");
+    act(() => {
+    //  expect(getByTestId("count").textContent).toEqual("1");
+    });
+    expect(getByTestId("count").textContent).toEqual("1");
+  });
+
+
+
+
+
+
+
+
+
 });

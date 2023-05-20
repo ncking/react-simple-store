@@ -24,6 +24,4 @@ const ComponentUnderTest = (props) => {
   );
 };
 
-describe("Redux api test", () => {
-
-});
+describe("Redux api test", () => {});
