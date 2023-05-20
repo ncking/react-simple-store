@@ -85,7 +85,7 @@ export const createStore = (
     addListener(args[1] ? createSelectorListner(...(args as [Selector, SelectorCallback, EqualityFn])) : args[0]);
   //
   const useStore: UseStoreApi = (selector, equalityFn, rebind) => {
-    const [{ v }, setValue] = useState({ v: selector(state) });
+    const [{ v, r }, setValue] = useState({ v: selector(state), r: rebind });
     /**
      * So between the useState() setup & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
@@ -95,13 +95,13 @@ export const createStore = (
       () => {
         const listner = createSelectorListner(
           selector,
-          (v: any) => setValue({ v }),
+          (v: any) => setValue({ v, r }),
           equalityFn
         );
         listner();
         return addListener(listner);
       },
-      rebind ? [selector] : []
+      r ? [selector] : []
     );
     return v;
   };
