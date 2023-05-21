@@ -1,6 +1,6 @@
 // copy of https://github.com/gaearon/react-pure-render/blob/master/src/shallowEqual.js
 
-export default function shallowEqual(objA: any, objB: any) {
+export const shallowEqual = (objA: any, objB: any) => {
   if (Object.is(objA, objB)) return true;
 
   if (
