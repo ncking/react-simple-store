@@ -1,4 +1,6 @@
-export type State = {};
+export type State = {
+   [x: string]: any;
+};
 export type ListenerCallback = (state: State, prevState: State) => void;
 export type EqualityFn = (
   oldSelectorValue: any,
@@ -25,7 +27,7 @@ export interface ActionSimple {
   type: any;
 }
 export interface Action extends ActionSimple {
-  [props: string]: any;
+  [x: string]: any;
 }
 export type Options = {
   allowNested?: boolean;
