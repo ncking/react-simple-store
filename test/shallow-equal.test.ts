@@ -1,6 +1,6 @@
 import { shallowEqual as s } from '../src/shallow-equal'
 
-const testArgs = []
+const testArgs: [any, any, boolean][] = []
 function shallowEqual(a1, a2) {
   const result = s(a1, a2)
   testArgs.push([a1, a2, result])
@@ -47,22 +47,6 @@ describe("shallow equals", () => {
 
 
   it('should return the same result for all tests, with args swapped', () => {
-    testArgs.map(([a1,a2,result]) => expect(s(a2,a1)).toBe(result))
+    testArgs.map(([a1, a2, result]) => expect(s(a2, a1)).toBe(result))
   })
 });
-
-
-
-
-// expect(shallowEqual({a:1:b:2}, {b:2:a:1})).toBe(true)
-// expect(shallowEqual(0, 0)).toBe(true)
-// expect(shallowEqual(0, 0)).toBe(true)
-
-// expect(shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined })).toBe(true)
-
-
-// expect(shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined })).toBe(true)
-
-
-// });
-
