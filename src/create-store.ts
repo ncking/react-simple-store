@@ -96,15 +96,13 @@ export const createStore = (
      *
      * Between the call to useState() & creating listners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
-     * or call the listner() , with our current state value to check for an update ...
-     * we could also do this with an in scope store update key (Symbol()),
-     *
+     * or create the listner() with our current state value & then check for an update ...
+     * We could also check with a state  id: Symbol()
      *
      * @TODO The assumption is useEffect destruct & reinit is sync ... we need to check this
      */
     useEffect(
       () => {
-        // so count in now 2
         const listner = createSelectorListner(
           selector,
           (v: any) => setValue({ v, r }),
