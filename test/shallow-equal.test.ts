@@ -1,9 +1,10 @@
 import { shallowEqual as s } from '../src/shallow-equal'
 
 const testArgs = []
-function shallowEqual(a1,a2) {
-  testArgs.push([a1,a2])
-  s(a1,a2)
+function shallowEqual(a1, a2) {
+  const result = s(a1, a2)
+  testArgs.push([a1, a2, result])
+  return result
 }
 describe("shallow equals", () => {
 
@@ -44,6 +45,10 @@ describe("shallow equals", () => {
     ).toBe(false)
   })
 
+
+  it('should return the same result for all tests, with args swapped', () => {
+    testArgs.map(([a1,a2,result]) => expect(s(a2,a1)).toBe(result))
+  })
 });
 
 
