@@ -1,5 +1,10 @@
-import { shallowEqual } from '../src/shallow-equal'
+import { shallowEqual as s } from '../src/shallow-equal'
 
+const testArgs = []
+function shallowEqual(a1,a2) {
+  testArgs.push([a1,a2])
+  s(a1,a2)
+}
 describe("shallow equals", () => {
 
   it('compare empty "empty" values, should be false', () => {
@@ -26,11 +31,9 @@ describe("shallow equals", () => {
     expect(shallowEqual({ a: 1, b }, { b, a: 1 })).toBe(true)
   })
 
-
   it('should return false if differnt number of keys', () => {
     expect(shallowEqual({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 })).toBe(false)
   })
-
 
   it('should return false if arguments have different keys', () => {
     expect(
