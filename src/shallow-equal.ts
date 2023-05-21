@@ -27,4 +27,4 @@ export const shallowEqual = (objA: any, objB: any) => {
   }
 
   return true;
-}
+};
