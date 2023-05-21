@@ -1,5 +1,5 @@
 export type State = {
-   [x: string]: any;
+  [x: string]: any;
 };
 export type ListenerCallback = (state: State, prevState: State) => void;
 export type EqualityFn = (
