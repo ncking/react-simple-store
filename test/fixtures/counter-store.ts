@@ -5,8 +5,8 @@ const initialState = {
 
 const actions = (set, get) => {
   return {
-    increment: () => set({ count: ++get().count }),
-    decement: () => set({ count: --get().count }),
+    increase: () => set({ count: ++get().count }),
+    decrease: () => set({ count: --get().count }),
   };
 };
 

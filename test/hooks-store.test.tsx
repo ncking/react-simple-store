@@ -17,7 +17,7 @@ const ComponentUnderTest = (props) => {
   return (
     <div>
       <div data-testid="count">{count}</div>
-      <button type="button" onClick={counterStore.increment}>
+      <button type="button" onClick={counterStore.increase}>
         +
       </button>
     </div>
@@ -25,7 +25,7 @@ const ComponentUnderTest = (props) => {
 };
 
 describe("react", () => {
-  it("counterStore increment", () => {
+  it("counterStore increase", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
     fireEvent.click(getByText("+"));
@@ -35,17 +35,17 @@ describe("react", () => {
   it("counterStore side-effect", async () => {
     const { getByTestId } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
-    act(() => counterStore.increment());
+    act(() => counterStore.increase());
     expect(getByTestId("count").textContent).toEqual("1");
   });
 
   it("counterStore side-effect settle first", async () => {
     const { getByTestId } = render(<ComponentUnderTest />);
     act(() => {
-      counterStore.increment();
-      counterStore.increment();
-      counterStore.increment();
-      counterStore.increment();
+      counterStore.increase();
+      counterStore.increase();
+      counterStore.increase();
+      counterStore.increase();
     });
     expect(getByTestId("count").textContent).toEqual("4");
   });
@@ -57,7 +57,7 @@ describe("react", () => {
     expect(getByTestId("count").textContent).toEqual("0");
     rerender(<ComponentUnderTest selector={(s) => 0} />);
     act(() => {
-      counterStore.increment();
+      counterStore.increase();
     });
     expect(getByTestId("count").textContent).toEqual("0");
   });
@@ -67,7 +67,7 @@ describe("react", () => {
     expect(getByTestId("count").textContent).toEqual("0");
     rerender(<ComponentUnderTest selector={(s) => 0} />);
     act(() => {
-      counterStore.increment();
+      counterStore.increase();
     });
     expect(getByTestId("count").textContent).toEqual("1");
   });
@@ -77,14 +77,14 @@ describe("react", () => {
       const count = counterStore.useStore((s) => s.count);
 
       useLayoutEffect(() => {
-        counterStore.increment();
-        counterStore.increment();
+        counterStore.increase();
+        counterStore.increase();
       }, []);
 
       return (
         <div>
           <div data-testid="count">{count}</div>
-          <button type="button" onClick={counterStore.increment}>
+          <button type="button" onClick={counterStore.increase}>
             +
           </button>
         </div>
