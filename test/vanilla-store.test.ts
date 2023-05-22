@@ -1,6 +1,5 @@
 import { recreateCounterStore } from "./fixtures/counter-store";
 
-
 let subscribe;
 let setState;
 let increase;

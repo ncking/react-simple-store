@@ -1,7 +1,7 @@
 import { createStoreRedux } from "../../src";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
-export const types = {INCREASE, DECREASE}
+export const types = { INCREASE, DECREASE };
 
 const initialState = {
   count: 0,
@@ -21,7 +21,4 @@ const reducers = (state, action) => {
 export const recreateCounterStoreRedux = () =>
   createStoreRedux(reducers, initialState);
 
-
-
-export const increaseAction = () => ({ type: types.INCREASE })
-
+export const increaseAction = () => ({ type: types.INCREASE });
