@@ -40,6 +40,7 @@ describe("shallow equals", () => {
     expect(
       shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, bb: 2, c: undefined })
     ).toBe(false);
+    expect(shallowEqual([1, 2, 3], [1, 2, 3, 4])).toBe(false);
   });
 
   it("should return the same result for all tests, with args swapped", () => {
