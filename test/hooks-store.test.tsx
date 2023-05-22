@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { render, fireEvent, act } from "@testing-library/react";
-import { recreateCounterStore } from "./fixtures";
+import { recreateCounterStore } from "./fixtures/counter-store";
 
 /**
  * Tests for React Hooks
@@ -24,7 +24,7 @@ const ComponentUnderTest = (props) => {
   );
 };
 
-describe("react", () => {
+describe("React hooks", () => {
   it("counterStore increase", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");

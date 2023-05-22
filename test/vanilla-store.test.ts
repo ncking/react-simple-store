@@ -1,4 +1,5 @@
-import { recreateCounterStore } from "./fixtures";
+import { recreateCounterStore } from "./fixtures/counter-store";
+
 
 let subscribe;
 let setState;

@@ -10,9 +10,9 @@ const initialState = {
 const reducers = (state, action) => {
   switch (action.type) {
     case INCREASE:
-      return { ...state, counter: ++state.counter };
+      return { ...state, count: ++state.count };
     case DECREASE:
-      return { ...state, counter: --state.counter };
+      return { ...state, count: --state.count };
     default:
       return state;
   }
@@ -20,3 +20,8 @@ const reducers = (state, action) => {
 
 export const recreateCounterStoreRedux = () =>
   createStoreRedux(reducers, initialState);
+
+
+
+export const increaseAction = () => ({ type: types.INCREASE })
+
