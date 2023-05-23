@@ -13,6 +13,7 @@ coverage
 
 
 # npm & yarn
+dist/
 _notes/
 node_modules/
 .npm
