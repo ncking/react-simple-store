@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, ComponentType} from "react";
 import { createStore } from "./create-store";
 import { shallowEqual } from "./shallow-equal";
 import { State, SetState, GetState, Reducer, Action, Selector } from "./types";
@@ -14,10 +14,10 @@ export const createStoreRedux = (reducer: Reducer, initialState: State) => {
   const { useStore, dispatch } = store;
   //
   store.connect = (mapStateToProps: Selector, mapDispatchToProps: any) => {
-    return (WrappedComponent: any) => {
-      const wrapedWithConnect = (props: any) => {
+    return <TProps,>(WrappedComponent: ComponentType<TProps>) => {
+      const wrapedWithConnect = (props: TProps) => {
         const state = useStore(mapStateToProps, shallowEqual);
-        return createElement(WrappedComponent, {
+        return createElement(WrappedComponent as ComponentType<{}>, {
           ...props,
           ...state,
           ...mapDispatchToProps(dispatch),
