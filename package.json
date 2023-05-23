@@ -23,9 +23,24 @@
   "unpkg": "./dist/react-simple-store.umd.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "require": "./dist/react-simple-store.cjs",
-    "default": "./dist/react-simple-store.esm.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": "./dist/create-store.esm.js",
+      "umd": "./dist/create-store.umd.js",
+      "default": "./dist/create-store.esm.js"
+    },
+    "./shallow-equal": {
+      "types": "./dist/shallow-equal.d.ts",
+      "browser": "./dist/shallow-equal.esm.js",
+      "umd": "./dist/shallow-equal.umd.js",
+      "default": "./dist/shallow-equal.esm.js"
+    },
+    "./redux": {
+      "types": "./dist/create-store-redux.d.ts",
+      "browser": "./dist/create-store-redux.esm.js",
+      "umd": "./dist/create-store-redux.umd.js",
+      "default": "./dist/create-store-redux.esm.js"
+    }
   },
   "engines": {
     "node": ">=18"
@@ -35,7 +50,7 @@
     "src"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production microbundle --entry src/index.ts --raw --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
+    "build": "cross-env NODE_ENV=production microbundle --entry src/{create-store,create-store-redux,shallow-equal}.ts --raw --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
     "clean": "rimraf lib dist coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",

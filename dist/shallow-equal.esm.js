@@ -1,0 +1,1 @@
+const t=(t,e)=>{if(Object.is(t,e))return!0;if("object"!=typeof t||null===t||"object"!=typeof e||null===e)return!1;const n=Object.keys(t),r=Object.keys(e);if(n.length!==r.length)return!1;const o=Object.prototype.hasOwnProperty.bind(e);for(let r=0;r<n.length;r++){const c=n[r];if(!o(c)||!Object.is(t[c],e[c]))return!1}return!0};export{t as shallowEqual};
