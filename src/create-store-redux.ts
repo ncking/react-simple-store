@@ -1,5 +1,6 @@
 import { createElement } from "react";
 import { createStore } from "./create-store";
+import { shallowEqual } from './shallow-equal'
 import { State, SetState, GetState, Reducer, Action, Selector } from "./types";
 
 export const createStoreRedux = (reducer: Reducer, initialState: State) => {
@@ -14,7 +15,7 @@ export const createStoreRedux = (reducer: Reducer, initialState: State) => {
   //
   store.connect = (mapStateToProps: Selector, mapDispatchToProps: any) => {
     return (Component: any) => (props: any) => {
-      const state = useStore(mapStateToProps);
+      const state = useStore(mapStateToProps, shallowEqual);
       return createElement(Component, {
         ...props,
         ...state,

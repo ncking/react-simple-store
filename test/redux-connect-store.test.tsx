@@ -40,6 +40,9 @@ describe("React +  Redux dispatch", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
     fireEvent.click(getByText("+"));
-    //expect(getByTestId("count").textContent).toEqual("1");
+    expect(getByTestId("count").textContent).toEqual("1");
   });
+
+
+ 
 });
