@@ -1,7 +1,8 @@
 import { createStoreRedux } from "../../src";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
-export const types = { INCREASE, DECREASE };
+const TIMESTAMP = "TIMESTAMP";
+export const types = { INCREASE, DECREASE, TIMESTAMP };
 
 const initialState = {
   count: 0,
@@ -13,6 +14,8 @@ const reducers = (state, action) => {
       return { ...state, count: ++state.count };
     case DECREASE:
       return { ...state, count: --state.count };
+    case TIMESTAMP:
+      return { ...state, timestamp: Date.now() };
     default:
       return state;
   }
@@ -22,3 +25,4 @@ export const recreateCounterStoreRedux = () =>
   createStoreRedux(reducers, initialState);
 
 export const increaseAction = () => ({ type: types.INCREASE });
+export const timestampAction = () => ({ type: types.TIMESTAMP });
