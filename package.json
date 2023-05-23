@@ -22,7 +22,7 @@
   "browser": "./dist/create-store.esm.js",
   "umd": "./dist/create-store.umd.js",
   "exports": {
-    ".": {
+    "./fgf": {
       "types": "./dist/index.d.ts",
       "browser": "./dist/create-store.esm.js",
       "umd": "./dist/create-store.umd.js",
@@ -49,7 +49,7 @@
     "src"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production microbundle --entry src/{create-store,create-store-redux,shallow-equal}.ts --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
+    "build": "cross-env NODE_ENV=production microbundle --alias ./create-store=@raiz/react-simple-store,./shallow-equal=@raiz/react-simple-store/shallow-equal --entry src/{create-store,create-store-redux,shallow-equal}.ts --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
     "clean": "rimraf lib dist coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
@@ -100,6 +100,8 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^5.59.5",
     "@typescript-eslint/parser": "^5.59.5",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
@@ -113,10 +115,9 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^4.9.3",
-    "cross-env": "^7.0.3"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@raiz/react-simple-store" : "file:./src/"
+    "@raiz/react-simple-store": "file:./src/"
   }
 }

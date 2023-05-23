@@ -1,4 +1,4 @@
-import { createStoreRedux } from "../../src";
+import { createStoreRedux } from "../../src/create-store-redux";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 const TIMESTAMP = "TIMESTAMP";
