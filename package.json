@@ -22,7 +22,7 @@
   "browser": "./dist/create-store.esm.js",
   "umd": "./dist/create-store.umd.js",
   "exports": {
-    "./fgf": {
+    ".": {
       "types": "./dist/index.d.ts",
       "browser": "./dist/create-store.esm.js",
       "umd": "./dist/create-store.umd.js",
