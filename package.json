@@ -23,7 +23,7 @@
   "umd": "./dist/create-store.umd.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/types.d.ts",
       "browser": "./dist/create-store.esm.js",
       "umd": "./dist/create-store.umd.js",
       "default": "./dist/create-store.esm.js"
