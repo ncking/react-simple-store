@@ -18,10 +18,9 @@
   "type": "module",
   "sideEffects": false,
   "source": "./src/index.ts",
-  "main": "./dist/react-simple-store.cjs",
-  "module": "./dist/react-simple-store.esm.js",
-  "unpkg": "./dist/react-simple-store.umd.js",
   "types": "./dist/index.d.ts",
+  "browser": "./dist/create-store.esm.js",
+  "umd": "./dist/create-store.umd.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -50,7 +49,7 @@
     "src"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production microbundle --entry src/{create-store,create-store-redux,shallow-equal}.ts --raw --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
+    "build": "cross-env NODE_ENV=production microbundle --entry src/{create-store,create-store-redux,shallow-equal}.ts --no-sourcemap --generateTypes true --jsx React.createElement --tsconfig ./tsconfig.json",
     "clean": "rimraf lib dist coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
@@ -114,9 +113,10 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
-    "cross-env": "^7.0.3"
+    
   }
 }
