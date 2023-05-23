@@ -3,18 +3,18 @@ import { render, fireEvent, act } from "@testing-library/react";
 import {
   recreateCounterStoreRedux,
   increaseAction,
-  timestampAction
+  timestampAction,
 } from "./fixtures/counter-store-redux";
 
 /**
  * Tests for Redux Connect
  */
 let ComponentUnderTest;
-let counterStore
+let counterStore;
 beforeEach(() => {
   counterStore = recreateCounterStoreRedux();
   //
-  let renderCount = 0
+  let renderCount = 0;
   const Component = ({ count, onClick, onClickTimestamp }) => {
     return (
       <div>
@@ -22,7 +22,9 @@ beforeEach(() => {
         <button type="button" onClick={onClick}>
           +
         </button>
-        <div data-testid="renderCount" onClick={onClickTimestamp}>{renderCount++}</div>
+        <div data-testid="renderCount" onClick={onClickTimestamp}>
+          {renderCount++}
+        </div>
       </div>
     );
   };
@@ -41,7 +43,6 @@ beforeEach(() => {
 });
 
 describe("React +  Redux dispatch", () => {
-
   it("counterStore increase", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");
@@ -51,13 +52,11 @@ describe("React +  Redux dispatch", () => {
 
   it("should not rerender on other slice change", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
-    const el = getByTestId("renderCount")
+    const el = getByTestId("renderCount");
     expect(el.textContent).toEqual("0");
     fireEvent.click(el);
     expect(el.textContent).toEqual("0");
     fireEvent.click(getByText("+"));
     expect(el.textContent).toEqual("1");
   });
-
-
 });
