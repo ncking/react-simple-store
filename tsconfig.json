@@ -3,7 +3,7 @@
       "strict": true,
       "target": "esnext",
       "module": "esnext",
-      "moduleResolution": "node",
+      "moduleResolution": "node16",
       "esModuleInterop": true,
       "skipLibCheck": true,
       "allowJs": true,

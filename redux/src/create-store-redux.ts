@@ -1,7 +1,7 @@
 import { createElement, ComponentType } from "react";
-import { createStore } from "./create-store";
-import { shallowEqual } from "./shallow-equal";
-import { State, SetState, GetState, Reducer, Action, Selector } from "./types";
+import { createStore } from "@raiz/react-simple-store";
+import { shallowEqual } from "@raiz/react-simple-store/shallow-equal";;
+import { State, SetState, GetState, Reducer, Action, Selector } from "./index";
 
 export const createStoreRedux = (reducer: Reducer, initialState: State) => {
   const actions = (setState: SetState, getState: GetState) => {
