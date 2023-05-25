@@ -4,7 +4,6 @@ import {
   ListenerCallback,
   State,
   EqualityFn,
-  Options,
   SetState,
   Selector,
   SelectorCallback,
@@ -16,16 +15,14 @@ import {
 
 export const createStore = (
   actions: ActionsCreator,
-  initialState: State = {},
-  options: Options = {}
+  initialState: State = {}
 ) => {
   let isDispatching = false;
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
-  const { allowNested = true } = options;
 
   const setState: SetState = (partial, replace) => {
-    if (!allowNested && isDispatching) {
+    if (isDispatching) {
       throw new Error("Nested state mutation disabled");
     }
     try {
@@ -34,7 +31,7 @@ export const createStore = (
         typeof partial === "function" ? partial(state) : partial;
       if (!Object.is(nextState, state)) {
         if (typeof nextState !== "object") {
-          throw new Error("next state not object");
+          throw new Error("next state is not an object");
         }
         const previousState = state;
         state = replace ? nextState : { ...state, ...nextState };
