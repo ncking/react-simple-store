@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import { render, fireEvent, act } from "@testing-library/react";
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
 import {
   recreateCounterStoreReduxConnect,
   increaseAction,
@@ -42,7 +42,7 @@ beforeEach(() => {
   )(Component);
 });
 
-describe("React +  Redux dispatch", () => {
+describe("Redux connect", () => {
   it("counterStore increase", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");

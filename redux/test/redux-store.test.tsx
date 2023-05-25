@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import {
   recreateCounterStoreRedux,
@@ -29,7 +29,7 @@ const ComponentUnderTest = (props) => {
   );
 };
 
-describe("React +  Redux dispatch", () => {
+describe("Redux dispatch", () => {
   it("counterStore increase", () => {
     const { getByTestId, getByText } = render(<ComponentUnderTest />);
     expect(getByTestId("count").textContent).toEqual("0");

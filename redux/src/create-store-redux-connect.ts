@@ -3,7 +3,7 @@ import { shallowEqual } from "@raiz/react-simple-store/utils";
 import { State, Reducer, Selector } from "./index.d";
 import { createStoreRedux } from './create-store-redux'
 
-const defaultMergeProps = (stateProps : {}, dispatchProps: {}, ownProps: {}) => ({ ...ownProps, ...stateProps, ...dispatchProps }) // Coorect merge order
+const defaultMergeProps = (stateProps : {}, dispatchProps: {}, ownProps: {}) => ({ ...ownProps, ...stateProps, ...dispatchProps }) // correct merge order
 
 export const createStoreReduxConnect = (reducer: Reducer, initialState: State) => {
   //
