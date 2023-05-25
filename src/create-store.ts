@@ -47,11 +47,11 @@ export const createStore = (
   const addListener = (listener: ListenerCallback): SubscribeUnbind => {
     listeners.add(listener);
     return (): void => {
-      listeners.delete(listener); //@NK TS: React.Destructor must return void, so cant use implicit return, as :delete returns boolean
+      listeners.delete(listener); //@NK TS: React.Destructor must return void, so can't use implicit return, as :delete returns boolean
     };
   };
 
-  const createSelectorListner: CreateSelectorListnerApi = (
+  const createSelectorListener: CreateSelectorListnerApi = (
     selector,
     callback,
     equalityFn,
@@ -79,7 +79,7 @@ export const createStore = (
   const subscribe: SubscribeApi = (...args) =>
     addListener(
       args[1]
-        ? createSelectorListner(
+        ? createSelectorListener(
             ...(args as [Selector, SelectorCallback, EqualityFn])
           )
         : args[0]
@@ -89,25 +89,25 @@ export const createStore = (
     const [{ v, r }, setValue] = useState({ v: selector(state), r: !!rebind }); // use obj when setting state, otherwise it may match on ref
     /**
      * Now we have useSyncExternalStoreWithSelector avalible, which
-     * performs a similar funtion: setSate on store change, with equality fn
+     * performs a similar funtion: setState on store change, with equality fn
      *
-     * Between the call to useState() & creating listners in useEffect, the state could of changed...
+     * Between the call to useState() & creating listeners in useEffect, the state could of changed...
      * So we either replace useEffect, with the sync useLayoutEffect (like react-redux),
-     * or create the listner() with our current state value & then check for an update ...
+     * or create the listener() with our current state value & then check for an update ...
      * We could also check with a state  id: Symbol()
      *
      * @TODO The assumption is useEffect destruct & reinit is sync ... we need to check this
      */
     useEffect(
       () => {
-        const listner = createSelectorListner(
+        const listener = createSelectorListener(
           selector,
           (v: any) => setValue({ v, r }),
           equalityFn,
           v
         );
-        listner(); /// run check that our value hasnt changed between the UseStoreApi() call & useEffect call
-        return addListener(listner);
+        listener(); /// run check that our value hasn't changed between the UseStoreApi() call & useEffect call
+        return addListener(listener);
       },
       r ? [selector] : []
     );
