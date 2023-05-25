@@ -116,11 +116,11 @@ export const createStore = (
 
   //
   return {
-    ...actions(setState, getState, { subscribe }),
     useStore,
     getState,
     setState,
     destroy,
     subscribe,
+    ...actions(setState, getState, { subscribe }),
   } as Record<string, Function>;
 };
