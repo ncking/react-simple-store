@@ -90,3 +90,19 @@ export const counterStore = createStore(actions, initialState);
 
 ##
 ## Using your store(s)
+
+
+```js
+// Basic hook usage
+import { counterStore } from './counterstore'
+
+const Component = (props) => {
+  const count = counterStore.useStore((s) => s.count);
+  return (
+    <div>
+      <div data-testid="count">{count}</div>
+      <button type="button" onClick={counterStore.increase}>+</button>
+    </div>
+  );
+};
+```
