@@ -1,4 +1,4 @@
-import { createStoreRedux } from "../../src";
+import { createStoreRedux, createStoreReduxConnect } from "../../src";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 const TIMESTAMP = "TIMESTAMP";
@@ -21,8 +21,12 @@ const reducers = (state, action) => {
   }
 };
 
+export const increaseAction = () => ({ type: types.INCREASE });
+export const timestampAction = () => ({ type: types.TIMESTAMP });
+
 export const recreateCounterStoreRedux = () =>
   createStoreRedux(reducers, initialState);
 
-export const increaseAction = () => ({ type: types.INCREASE });
-export const timestampAction = () => ({ type: types.TIMESTAMP });
+
+export const recreateCounterStoreReduxConnect = () =>
+  createStoreReduxConnect(reducers, initialState);

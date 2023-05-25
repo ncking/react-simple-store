@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import {
-  recreateCounterStoreRedux,
+  recreateCounterStoreReduxConnect,
   increaseAction,
   timestampAction,
 } from "./fixtures/counter-store-redux";
@@ -12,7 +12,7 @@ import {
 let ComponentUnderTest;
 let counterStore;
 beforeEach(() => {
-  counterStore = recreateCounterStoreRedux();
+  counterStore = recreateCounterStoreReduxConnect();
   //
   let renderCount = 0;
   const Component = ({ count, onClick, onClickTimestamp }) => {
