@@ -1,4 +1,4 @@
-import { shallowEqual as s } from "../src/shallow-equal";
+import { shallowEqual as s } from "../src"
 
 const testArgs: [any, any, boolean][] = [];
 function shallowEqual(a1, a2) {

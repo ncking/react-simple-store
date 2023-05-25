@@ -12,7 +12,7 @@ import {
   SubscribeUnbind,
   UseStoreApi,
   CreateSelectorListnerApi,
-} from "./types";
+} from "./index.d";
 
 export const createStore = (
   actions: ActionsCreator,

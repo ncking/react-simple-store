@@ -34,3 +34,15 @@ export type CreateSelectorListnerApi = (
   equalityFn?: EqualityFn,
   initialReactHookValue?: any
 ) => () => void;
+
+export type ActionsCreator = (
+  setState: SetState,
+  getState: GetState,
+  { subscribe }: { subscribe: SubscribeApi }
+) => State;
+
+export declare const createStore: (
+  actions: ActionsCreator,
+  initialState?: State,
+  options?: Options
+) => Record<string, Function>;

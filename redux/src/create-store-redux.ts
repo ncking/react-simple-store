@@ -1,7 +1,9 @@
 import { createElement, ComponentType } from "react";
 import { createStore } from "@raiz/react-simple-store";
-import { shallowEqual } from "@raiz/react-simple-store/shallow-equal";;
-import { State, SetState, GetState, Reducer, Action, Selector } from "./index";
+import { shallowEqual } from "@raiz/react-simple-store/utils";
+import { State, SetState, GetState, Reducer, Action, Selector } from "./index.d";
+
+const defaultMergeProps = (stateProps, dispatchProps, ownProps) => ({ ...ownProps, ...stateProps, ...dispatchProps }) // Coorect merge order
 
 export const createStoreRedux = (reducer: Reducer, initialState: State) => {
   const actions = (setState: SetState, getState: GetState) => {
@@ -13,15 +15,13 @@ export const createStoreRedux = (reducer: Reducer, initialState: State) => {
   const store = createStore(actions, initialState);
   const { useStore, dispatch } = store;
   //
-  store.connect = (mapStateToProps: Selector, mapDispatchToProps: any) => {
+  store.connect = (mapStateToProps: Selector, mapDispatchToProps?: Function | Record<string, any>, mergeProps: Function = defaultMergeProps, options?: object) => {
     return <TProps>(WrappedComponent: ComponentType<TProps>) => {
-      const wrapedWithConnect = (props: TProps) => {
-        const state = useStore(mapStateToProps, shallowEqual);
-        return createElement(WrappedComponent as ComponentType<{}>, {
-          ...props,
-          ...state,
-          ...mapDispatchToProps(dispatch),
-        });
+
+      const wrapedWithConnect = (ownProps: TProps) => {
+        const dispatchProps: object = typeof mapDispatchToProps === 'function' ? mapDispatchToProps(dispatch, ownProps) : mapDispatchToProps
+        const stateProps = useStore(mapStateToProps, shallowEqual);
+        return createElement(WrappedComponent as ComponentType<{}>, mergeProps(stateProps, dispatchProps, ownProps));
       };
 
       const wrappedComponentName =
@@ -33,3 +33,4 @@ export const createStoreRedux = (reducer: Reducer, initialState: State) => {
 
   return store;
 };
+
