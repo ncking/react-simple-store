@@ -142,8 +142,5 @@
     "rimraf": "^5.0.0",
     "ts-jest": "^29.1.0",
     "typescript": "^4.9.3"
-  },
-  "dependencies": {
-    "@raiz/react-simple-store": "file:."
   }
 }
