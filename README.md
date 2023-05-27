@@ -6,7 +6,7 @@ We have been using this in production for since 2020, mostly on React/Preact, SE
 
 ## Advantages 
 
-- Small bundle size ~0.5K
+- Small bundle size ~0.5K zipped
 - Performance - re-rendered only on required state changes
 - Familiar api: similar to React-Redux, Zustand, Easy Peasy ...
 - Granular module exports adding functionality:  React >> React Redux >> React Redux Connect 
