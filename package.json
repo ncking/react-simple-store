@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "@raiz/react-simple-store",
   "description": "basic store for react & vanilla js",
   "keywords": [
@@ -82,9 +82,7 @@
   },
   "peerDependencies": {
     "@types/react": "^16.8 || ^17.0 || ^18.0",
-    "react": "^16.8 || ^17.0 || ^18.0",
-    "react-native": ">=0.59",
-    "typescript": ">=3.9.0"
+    "react": "^16.8 || ^17.0 || ^18.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {

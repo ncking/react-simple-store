@@ -12,13 +12,17 @@
       "outDir": "dist",
       "forceConsistentCasingInFileNames": true,
       "experimentalDecorators": true,
-      "rootDirs": ["./src", "./redux", "./utils","./types"],
+      "rootDirs": ["./src"],
       "rootDir": "./",
       "typeRoots": [
         "./node_modules/@types",
-        "./types"
-      ]
+        "./src"
+      ],
+      "paths" : {
+        "@raiz/react-simple-store" : ["./src"],
+        "@raiz/react-simple-store/utils" : ["./utils"]
+      }
     },
-    "include": ["src/**/*", "tests/**/*"],
+    "include": ["src/**/*", "tests/**/*", "utils/**/*", "redux/**/*"],
     "exclude": ["node_modules", "dist", "test/**/*"]
   }
