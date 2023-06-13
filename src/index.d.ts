@@ -6,17 +6,22 @@ export type EqualityFn = (
   oldSelectorValue: any,
   newSelectorValue: any
 ) => boolean;
+
 export type SetState = (partial: Partial<State>, replace?: boolean) => void;
 export type GetState = () => State;
 export type Selector = (state: State) => any;
 export type SelectorCallback = (nextState?: State, prevState?: State) => void;
-
 export type SubscribeUnbind = () => void;
 export type SubscribeApi = (
   selector: Selector,
   callback?: SelectorCallback,
   equalityFn?: EqualityFn
 ) => SubscribeUnbind;
+
+export type CreateStoreApi = ({
+  actions: ActionsCreator,
+  state: State,
+}) => void;
 
 export type Options = {
   allowNested?: boolean;

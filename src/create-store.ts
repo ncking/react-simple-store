@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import {
-  ActionsCreator,
-  ListenerCallback,
-  State,
+  CreateSelectorListnerApi,
+  CreateStoreApi,
   EqualityFn,
+  ListenerCallback,
   SetState,
   Selector,
   SelectorCallback,
+  State,
   SubscribeApi,
   SubscribeUnbind,
   UseStoreApi,
-  CreateSelectorListnerApi,
 } from "./index.d";
 
-export const createStore = (
-  actions: ActionsCreator,
-  initialState: State = {}
-) => {
+export const createStore: CreateStoreApi = ({
+  actions = () => ({}),
+  state: initialState = {},
+}) => {
   let isDispatching = false;
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
