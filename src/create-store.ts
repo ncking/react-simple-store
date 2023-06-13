@@ -122,5 +122,5 @@ export const createStore: CreateStoreApi = ({
     destroy,
     subscribe,
     ...actions(setState, getState, { subscribe }),
-  } as Record<string, Function>;
+  };
 };

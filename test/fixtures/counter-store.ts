@@ -1,5 +1,5 @@
 import { createStore } from "../../src";
-export { createStore } from '../../src'
+export { createStore } from "../../src";
 
 export const state = {
   count: 0,
@@ -11,5 +11,5 @@ export const actions = (set, get) => {
     decrease: () => set({ count: --get().count }),
   };
 };
-const args = { actions, state }
+const args = { actions, state };
 export const recreateCounterStore = () => createStore(args);

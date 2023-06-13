@@ -22,7 +22,9 @@ type CreateOptions = {
   actions?: ActionsCreator;
   state?: State;
 };
-export type CreateStoreApi = (options: CreateOptions = {}) => void;
+export type CreateStoreApi = (
+  options: CreateOptions = {}
+) => Record<string, Function>;
 
 export type Options = {
   allowNested?: boolean;
