@@ -18,10 +18,11 @@ export type SubscribeApi = (
   equalityFn?: EqualityFn
 ) => SubscribeUnbind;
 
-export type CreateStoreApi = ({
-  actions: ActionsCreator,
-  state: State,
-}) => void;
+type CreateOptions = {
+  actions?: ActionsCreator;
+  state?: State;
+};
+export type CreateStoreApi = (options: CreateOptions = {}) => void;
 
 export type Options = {
   allowNested?: boolean;

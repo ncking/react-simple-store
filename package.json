@@ -18,14 +18,14 @@
   "type": "module",
   "sideEffects": false,
   "source": "./src/index.ts",
-  "main": "./dist/index.cjs",
+  "main": "./src/index.ts",
   "module": "./dist/index.module.js",
   "types": "./src/index.d.ts",
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
-      "module": "./dist/index.module.js",
-      "default": "./dist/index.cjs"
+      "module": "./src/index.ts",
+      "default": "./src/index.ts"
     },
     "./utils": {
       "types": "./utils/src/index.d.ts",

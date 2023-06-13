@@ -16,7 +16,7 @@ import {
 export const createStore: CreateStoreApi = ({
   actions = () => ({}),
   state: initialState = {},
-}) => {
+} = {}) => {
   let isDispatching = false;
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
