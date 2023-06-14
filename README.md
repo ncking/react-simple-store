@@ -31,12 +31,22 @@ We have extended this function with 2 Redux varients: `createStoreRedux` & `crea
 these add methos to mimic depatch & connect apis.
 For all modern projects we recommend just using `createStore`.
 
+
 #### Basic store
+```js
+// Basic store, with no arguments
+import { createStore } from '@raiz/react-simple-store'
+export const counterStore =  createStore();
+
+```
+
+
+#### Basic store with initial state & actions
 ```js
 // Basic store
 import { createStore } from '@raiz/react-simple-store'
 
-const initialState = {
+const state = {
   count: 0,
 };
 
@@ -47,7 +57,7 @@ const actions = (set, get) => {
   };
 };
 
-export const counterStore =  createStore(actions, initialState);
+export const counterStore =  createStore({actions, state});
 ```
 
 ##
@@ -56,7 +66,7 @@ export const counterStore =  createStore(actions, initialState);
 // Basic store
 import { createStore } from '@raiz/react-simple-store'
 import { shallowEqual } from '@raiz/react-simple-store/utils'
-const initialState = {
+const state = {
   count: 0,
 };
 
@@ -67,7 +77,7 @@ const actions = (set, get) => {
   };
 };
 
-export const counterStore =  createStore(actions, initialState);
+export const counterStore =  createStore({actions, state});
 // add a hook method with shallowEqual fn
 counterStore.useStoreShallow = selector => counterStore.useStore(selector, shallowEqual)
 ```
@@ -82,10 +92,10 @@ We prefer exporting the store object, this makes it clear & consistent when mult
 ```js
 // export store methods
 // The downside is we must name all the custom actions & most likely will have to alias 
-export const { useStore, getState, setState, destroy, subscribe} = createStore(actions, initialState);
+export const { useStore, getState, setState, destroy, subscribe} = createStore({actions, state});
 
 // export the store instance; clear & consistent
-export const counterStore = createStore(actions, initialState);
+export const counterStore = createStore({actions, state});
 ```
 
 ##

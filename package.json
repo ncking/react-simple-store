@@ -76,7 +76,7 @@
       },
       {
         "path": "./redux/dist/index.module.js",
-        "maxSize": "320 B"
+        "maxSize": "330 B"
       }
     ]
   },
