@@ -49,8 +49,8 @@ export type ActionsCreator = (
   { subscribe }: { subscribe: SubscribeApi }
 ) => State;
 
-export declare const createStore: (
-  actions: ActionsCreator,
-  initialState?: State,
-  options?: Options
-) => Record<string, Function>;
+// export declare const createStore: (
+//   actions: ActionsCreator,
+//   initialState?: State,
+//   options?: Options
+// ) => Record<string, Function>;
