@@ -12,6 +12,9 @@ coverage
 *.log
 
 
+# pack test
+*.tgz
+
 # npm & yarn
 dist/
 _notes/

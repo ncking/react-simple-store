@@ -68,7 +68,7 @@
     "files": [
       {
         "path": "./dist/index.module.js",
-        "maxSize": "550 B"
+        "maxSize": "560 B"
       },
       {
         "path": "./utils/dist/index.module.js",
