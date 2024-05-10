@@ -11,7 +11,7 @@ import {
   SubscribeApi,
   SubscribeUnbind,
   UseStoreApi,
-} from "./index.d";
+} from "./types";
 
 export const createStore: CreateStoreApi = (options = {}) => {
 

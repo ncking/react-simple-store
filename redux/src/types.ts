@@ -1,5 +1,5 @@
-import { State } from '../../src/index.d'
-export * from '../../src/index.d'
+import type { State } from '../../src/types'
+
 
 export type Reducer = (state: State, action: Action | ActionSimple) => State;
 
