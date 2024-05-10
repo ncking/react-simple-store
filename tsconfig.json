@@ -1,13 +1,17 @@
 {
     "compilerOptions": {
       "strict": true,
-      "target": "esnext",
-      "module": "esnext",
       "moduleResolution": "node",
       "esModuleInterop": true,
-      "skipLibCheck": true,
-      "allowJs": true,
+      "target": "ES2020",
+
+       
       "jsx": "react",
+      "jsxFactory": "createElement",
+      "jsxFragmentFactory": "Fragment",
+
+
+      "module": "esnext",
       "declaration": true,
       "outDir": "dist",
       "forceConsistentCasingInFileNames": true,
@@ -26,3 +30,6 @@
     "include": ["src/**/*", "tests/**/*", "utils/**/*", "redux/**/*"],
     "exclude": ["node_modules", "dist", "test/**/*"]
   }
+
+
+
