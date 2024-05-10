@@ -58,7 +58,7 @@
     "build": "cross-env NODE_ENV=production microbundle --entry src/index.ts --no-sourcemap --no-generateTypes --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
     "build:utils": "cross-env NODE_ENV=production microbundle --entry src/index.ts --cwd utils  --no-generateTypes   --no-sourcemap  --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
     "build:redux": "cross-env NODE_ENV=production microbundle  --entry src/index.ts --cwd redux  --no-generateTypes   --no-sourcemap  --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
-    "clean": "rimraf  dist redux/dist utils/dist coverage",
+    "clean": "shx rm -rf ./dist */dist/ coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
     "prepare": "npm run clean && npm run build && npm run build:redux && npm run build:utils && check-export-map && bundlewatch",
@@ -137,8 +137,8 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rimraf": "^5.0.0",
+    "shx": "^0.3.4",
     "ts-jest": "^29.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^5.4.5"
   }
 }
