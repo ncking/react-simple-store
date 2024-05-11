@@ -3,6 +3,6 @@
   "type": "module",
   "peerDependencies": {
     "react": "^16.8 || ^17.0 || ^18.0",
-    "@raiz/react-simple-store": "file:.."
+    "@raiz/react-simple-store": "file:../core"
   }
 }

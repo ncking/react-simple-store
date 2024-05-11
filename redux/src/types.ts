@@ -1,4 +1,4 @@
-import type { State } from '../../src/types'
+import type { State } from '../../core/src/types'
 
 
 export type Reducer = (state: State, action: Action | ActionSimple) => State;

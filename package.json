@@ -49,7 +49,7 @@
   ],
   "scripts": {
     "build" : "npm run clean && npm run build:core && npm run build:redux && npm run build:utils",
-    "build:core": "microbundle --entry src/index.ts --no-sourcemap  --tsconfig ./tsconfig.json -o dist/index.js",
+    "build:core": "microbundle --entry src/index.ts --cwd core --no-sourcemap  --tsconfig ./tsconfig.json -o dist",
     "build:utils": "microbundle --entry src/index.ts --cwd utils  --no-generateTypes   --no-sourcemap  --tsconfig ./tsconfig.json -o dist/index.js",
     "build:redux": "microbundle  --entry src/index.ts --cwd redux  --no-generateTypes   --no-sourcemap  --tsconfig ./tsconfig.json -o dist/index.js",
     "clean": "shx rm -rf ./dist */dist/ coverage",

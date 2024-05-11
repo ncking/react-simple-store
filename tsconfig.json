@@ -7,14 +7,11 @@
       "jsx": "react",
       "jsxFactory": "createElement",
       "jsxFragmentFactory": "Fragment",
-      "outDir": "dist",
-      "rootDirs": ["./src", "./src/redux", "./src/utils"],
       "paths" : {
-        "@raiz/react-simple-store" : ["./src"],
-        "@raiz/react-simple-store/utils" : ["./utils"]
+        "@raiz/react-simple-store" : ["./core/src"],
+        "@raiz/react-simple-store/utils" : ["./utils/src"]
       }
     },
-    "include": ["src/**/*", "tests/**/*", "utils/**/*", "redux/**/*"],
     "exclude": ["node_modules", "dist", "test/**/*"]
   }
 
