@@ -1,5 +1,4 @@
-import { createStore } from "../../src";
-export { createStore } from "../../src";
+import { createStore } from "../../index";
 
 export const state = {
   count: 0,

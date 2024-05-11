@@ -1,4 +1,4 @@
-import { createStoreRedux, createStoreReduxConnect } from "../../src";
+import { createStoreRedux, createStoreReduxConnect } from "../../index";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 const TIMESTAMP = "TIMESTAMP";
