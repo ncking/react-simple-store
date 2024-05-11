@@ -33,10 +33,10 @@
     "utils/package.json"
   ],
   "scripts": {
-    "build" : "npm run clean && npm run build:core && npm run build:utils",
-    "build:core": "microbundle --entry ./src/core/index.ts  --no-sourcemap  -o dist/core",
-    "build:redux": "microbundle --entry ./src/redux/index.ts  --no-sourcemap  -o dist/redux",
-    "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils",
+    "build" : "npm run clean && npm run build:core && npm run build:utils && npm run build:redux",
+    "build:core": "microbundle --entry ./src/core/index.ts  --no-sourcemap  -o dist/core/index.js",
+    "build:redux": "microbundle --entry ./src/redux/index.ts  --no-sourcemap  -o dist/redux/redux.js",
+    "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils/utils.js",
     "clean": "shx rm -rf dist src/**/dist coverage"
   },
 
@@ -100,5 +100,8 @@
     "shx": "^0.3.4",
     "ts-jest": "^29.1.0",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@raiz/react-simple-store" : "file:./src/core"
   }
 }
