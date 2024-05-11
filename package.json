@@ -34,8 +34,8 @@
   ],
   "scripts": {
     "build" : "npm run clean && npm run build:core",
-    "build:core": "microbundle --entry ./src/core/index.ts  --no-sourcemap  -o dist",
-    "clean": "shx rm -rf /dist src/**/dist coverage"
+    "build:core": "microbundle --entry ./src/core/src/index.ts  --no-sourcemap  -o dist/core",
+    "clean": "shx rm -rf dist src/**/dist coverage"
   },
 
   "peerDependencies": {

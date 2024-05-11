@@ -9,7 +9,7 @@
       "jsxFragmentFactory": "Fragment",
       "paths" : {
         "@raiz/react-simple-store" : ["./src/core/src"],
-        "@raiz/react-simple-store/utils" : ["./utils/src"]
+        "@raiz/react-simple-store/utils" : ["./src/utils/src"]
       }
     },
     "exclude": ["node_modules", "dist", "test/**/*"]
