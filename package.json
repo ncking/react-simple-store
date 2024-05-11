@@ -37,22 +37,7 @@
     "build:core": "microbundle --entry ./src/core/index.ts  --no-sourcemap  -o dist",
     "clean": "shx rm -rf /dist src/**/dist coverage"
   },
-  "bundlewatch": {
-    "files": [
-      {
-        "path": "./dist/index.esm.js",
-        "maxSize": "560 B"
-      },
-      {
-        "path": "./utils/dist/index.esm.js",
-        "maxSize": "250 B"
-      },
-      {
-        "path": "./redux/dist/index.esm.js",
-        "maxSize": "330 B"
-      }
-    ]
-  },
+
   "peerDependencies": {
     "@types/react": "^16.8 || ^17.0 || ^18.0",
     "react": "^16.8 || ^17.0 || ^18.0"
