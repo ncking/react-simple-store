@@ -18,22 +18,7 @@
   "type": "module",
   "sideEffects": false,
   
-  "main": "./src/index.ts",
-  
-  "exports": {
-    ".": {
-      "types": "./dist/.ts"
-    },
-    "./utils": {
-      "types": "./utils/src/types.ts"
-    },
-    "./redux": {
-      "types": "./redux/src/types.ts"
-    },
-    "./package.json": "./package.json",
-    "./redux/package.json": "./redux/package.json",
-    "./utils/package.json": "./utils/package.json"
-  },
+
   "engines": {
     "node": ">=20"
   },
@@ -49,9 +34,12 @@
   ],
   "scripts": {
     "build" : "npm run clean && npm run build:core && npm run build:redux && npm run build:utils",
-    "build:core": "microbundle --entry src/index.ts --cwd core --no-sourcemap  -o dist",
-    "build:utils": "microbundle --entry src/index.ts --cwd utils  --no-generateTypes   --no-sourcemap  -o dist",
-    "build:redux": "microbundle  --entry src/index.ts --cwd redux  --no-generateTypes   --no-sourcemap   -o dist",
+    "build:core": "microbundle --entry core/src/index.ts  --no-sourcemap  -o core/dist",
+    "build:redux": "microbundle  --entry redux/src/index.ts  --no-generateTypes   --no-sourcemap   -o redux/dist",
+    
+    "build:utils": "microbundle --entry utils/src/index.ts   --no-generateTypes   --no-sourcemap  -o utils/dist",
+
+
     "clean": "shx rm -rf ./dist */dist/ coverage",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
     "lint": "eslint src --ext ts,tsx,js",
