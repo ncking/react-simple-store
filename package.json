@@ -33,18 +33,9 @@
     "utils/package.json"
   ],
   "scripts": {
-    "build" : "npm run clean && npm run build:core && npm run build:redux && npm run build:utils",
-    "build:core": "microbundle --entry core/src/index.ts  --no-sourcemap  -o core/dist",
-    "build:redux": "microbundle  --entry redux/src/index.ts  --no-sourcemap   -o redux/dist",
-    "build:utils": "microbundle --entry utils/src/index.ts    --no-sourcemap  -o utils/dist",
-
-
-    "clean": "shx rm -rf dist */**/dist coverage",
-    "format": "prettier --write \"{src,test}/**/*.{js,ts,tsx}\"",
-    "lint": "eslint src --ext ts,tsx,js",
-    "prepare": "npm run build && check-export-map && bundlewatch",
-    "check:exports" : "check-export-map",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --verbose"
+    "build" : "npm run clean && npm run build:core",
+    "build:core": "microbundle --entry ./src/core/index.ts  --no-sourcemap  -o dist",
+    "clean": "shx rm -rf /dist src/**/dist coverage"
   },
   "bundlewatch": {
     "files": [
