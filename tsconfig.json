@@ -8,8 +8,8 @@
       "jsxFactory": "createElement",
       "jsxFragmentFactory": "Fragment",
       "paths" : {
-        "@raiz/react-simple-store" : ["./src/core/src"],
-        "@raiz/react-simple-store/utils" : ["./src/utils/src"]
+        "@raiz/react-simple-store" : ["./src/core"],
+        "@raiz/react-simple-store/utils" : ["./src/utils"]
       }
     },
     "exclude": ["node_modules", "dist", "test/**/*"]

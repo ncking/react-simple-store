@@ -35,6 +35,7 @@
   "scripts": {
     "build" : "npm run clean && npm run build:core && npm run build:utils",
     "build:core": "microbundle --entry ./src/core/src/index.ts  --no-sourcemap  -o dist/core",
+    "build:redux": "microbundle --entry ./src/redux/src/index.ts  --no-sourcemap  -o dist/redux",
     "build:utils": "microbundle --entry ./src/utils/src/index.ts  --no-sourcemap  -o dist/utils",
     "clean": "shx rm -rf dist src/**/dist coverage"
   },
