@@ -5,6 +5,8 @@
       "esModuleInterop": true,
       "target": "ES2020",
       "jsx": "react",
+      "jsxFactory": "React.createElement",
+      "jsxFragmentFactory": "React.Fragment",
       "paths" : {
         "@raiz/react-simple-store" : ["./src/core"],
         "@raiz/react-simple-store/utils" : ["./src/utils"]
