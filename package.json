@@ -18,6 +18,7 @@
   "type": "module",
   "sideEffects": false,
   "amdName": "reactSimpleStore",
+  "types": "./dist/core/index.d.ts",
   "exports": {
     ".": {
       "main": "./dist/core/index.cjs",
@@ -38,7 +39,7 @@
   },
 
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "files": [
     "dist",
