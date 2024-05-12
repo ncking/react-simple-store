@@ -17,14 +17,21 @@
   "bugs": "https://github.com/ncking/react-simple-store/issues",
   "type": "module",
   "sideEffects": false,
+  "amdName": "reactSimpleStore",
   "exports": {
     ".": {
+      "main": "./dist/core/index.cjs",
+      "module": "./dist/core/index.esm.js",
       "types": "./dist/core/index.d.ts"
     },
     "./redux": {
+      "main": "./dist/redux/redux.cjs",
+      "module": "./dist/redux/redux.esm.js",
       "types": "./dist/redux/redux/index.d.ts"
     },
     "./utils": {
+      "main": "./dist/utils/utils.cjs",
+      "module": "./dist/utils/utils.esm.js",
       "types": "./dist/utils/index.d.ts"
     },
     "./package.json": "./package.json"
@@ -35,16 +42,10 @@
   },
   "files": [
     "dist",
-    "src",
-    "redux/dist",
-    "redux/src",
-    "redux/package.json",
-    "utils/dist",
-    "utils/src",
-    "utils/package.json"
+    "package.json"
   ],
   "scripts": {
-    "build" : "npm run clean && npm run build:core && npm run build:utils && npm run build:redux",
+    "build" : "npm run clean && npm run build:core && npm run build:redux && npm run build:utils",
     "build:core":  "microbundle --entry ./src/core/index.ts   --no-sourcemap  -o dist/core/index.js",
     "build:redux": "microbundle --entry ./src/redux/index.ts  --no-sourcemap  -o dist/redux/redux.js",
     "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils/utils.js",
