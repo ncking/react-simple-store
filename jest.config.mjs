@@ -4,9 +4,9 @@ export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   roots: [
-    "./test",
-    "./redux/test/",
-    "./utils/test/"
+    "./src/core/test",
+    "./src/redux/test/",
+    "./src/utils/test/"
   ],
   transform: {
     "^.+\\.tsx?$": [
@@ -17,8 +17,8 @@ export default {
     ],
   },
   moduleNameMapper: {
-    "^@raiz/react-simple-store$": "<rootDir>/src/",
-    "^@raiz/react-simple-store/(.*)$": "<rootDir>/$1"
+    "^@raiz/react-simple-store$": "<rootDir>/src/core/",
+    "^@raiz/react-simple-store/(.*)$": "<rootDir>/src/$1"
   }
 };
 
