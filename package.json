@@ -17,6 +17,11 @@
   "bugs": "https://github.com/ncking/react-simple-store/issues",
   "type": "module",
   "sideEffects": false,
+
+
+  "types": "./dist/core/index.d.ts",
+
+
   "exports": {
     ".": {
       "types": "./dist/core/index.d.ts"
@@ -48,7 +53,8 @@
     "build:redux": "microbundle --entry ./src/redux/index.ts  --no-sourcemap  -o dist/redux/redux.js",
     "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils/utils.js",
     "clean": "shx rm -rf dist src/**/dist coverage",
-    "prepare": "npm run build && check-export-map && bundlewatch"
+    "prepare": "npm run build && check-export-map && bundlewatch",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --verbose"
   },
   "bundlewatch": {
     "files": [
