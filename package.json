@@ -18,6 +18,9 @@
   "type": "module",
   "sideEffects": false,
   "amdName": "reactSimpleStore",
+  "main": "./dist/core/index.cjs",
+  "module": "./dist/core/index.esm.js",
+  "types": "./dist/core/index.d.ts",
   "exports": {
     ".": {
       "main": "./dist/core/index.cjs",
@@ -38,7 +41,7 @@
   },
 
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "files": [
     "dist",
@@ -48,7 +51,7 @@
     "build" : "npm run clean && npm run build:core && npm run build:redux && npm run build:utils",
     "build:core":  "microbundle --entry ./src/core/index.ts   --no-sourcemap  -o dist/core/index.js",
     "build:redux": "microbundle --entry ./src/redux/index.ts  --no-sourcemap  -o dist/redux/redux.js",
-    "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils/utils.js",
+    "build:utils": "microbundle --entry ./src/utils/index.ts  --no-sourcemap  -o dist/utils/utils.js  --tsconfig ./src/utils/tsconfig.json",
     "clean": "shx rm -rf dist src/**/dist coverage",
     "prepare": "npm run build && check-export-map && bundlewatch",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --verbose"

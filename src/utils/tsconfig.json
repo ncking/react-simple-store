@@ -7,6 +7,8 @@
       "jsx": "react",
       "jsxFactory": "React.createElement",
       "jsxFragmentFactory": "React.Fragment",
+      "rootDir": ".",
+      "outDir": "/dgiudfhguihdghdfugh",
       "paths" : {
         "@raiz/react-simple-store" : ["./src/core"],
         "@raiz/react-simple-store/utils" : ["./src/utils"]
