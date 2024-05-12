@@ -17,19 +17,28 @@
   "bugs": "https://github.com/ncking/react-simple-store/issues",
   "type": "module",
   "sideEffects": false,
-
-
+  "amdName": "reactSimpleStore",
+  "main": "./dist/core/index.cjs",
+  "umd:main": "./dist/core/index.udm.js",
+  "module": "./dist/core/index.esm.js",
   "types": "./dist/core/index.d.ts",
-
-
   "exports": {
     ".": {
+      "main": "./dist/core/index.cjs",
+      "umd:main": "./dist/core/index.udm.js",
+      "module": "./dist/core/index.esm.js",
       "types": "./dist/core/index.d.ts"
     },
     "./redux": {
+      "main": "./dist/redux/redux.cjs",
+      "umd:main": "./dist/redux/redux.udm.js",
+      "module": "./dist/redux/redux.esm.js",
       "types": "./dist/redux/redux/index.d.ts"
     },
     "./utils": {
+      "main": "./dist/utils/utils.cjs",
+      "umd:main": "./dist/utils/utils.udm.js",
+      "module": "./dist/utils/utils.esm.js",
       "types": "./dist/utils/index.d.ts"
     },
     "./package.json": "./package.json"
