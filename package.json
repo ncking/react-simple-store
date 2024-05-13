@@ -27,15 +27,15 @@
       "module": "./src/index.ts",
       "default": "./src/index.ts"
     },
-    "./utils": {
-      "types": "./utils/src/index.d.ts",
-      "module": "./utils/dist/index.module.js",
-      "default": "./utils/dist/index.cjs"
-    },
     "./redux": {
       "types": "./redux/src/index.d.ts",
       "module": "./redux/dist/index.module.js",
       "default": "./redux/dist/index.cjs"
+    },
+    "./utils": {
+      "types": "./utils/src/types.ts",
+      "module": "./utils/dist/index.module.js",
+      "default": "./utils/dist/index.cjs"
     },
     "./package.json": "./package.json",
     "./redux/package.json": "./redux/package.json",
@@ -55,7 +55,7 @@
     "utils/package.json"
   ],
   "scripts": {
-    "build" : "npm run build:core && npm run build:redux && npm run build:utils",
+    "build": "npm run build:core && npm run build:redux && npm run build:utils",
     "build:core": "microbundle --entry src/index.ts --no-sourcemap --no-generateTypes --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
     "build:utils": "microbundle --entry src/index.ts --cwd utils  --no-generateTypes   --no-sourcemap  --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
     "build:redux": "microbundle  --entry src/index.ts --cwd redux  --no-generateTypes   --no-sourcemap  --jsx React.createElement --tsconfig ./tsconfig.json -o dist/index.js",
