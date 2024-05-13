@@ -1,8 +1,8 @@
 import { createElement, ComponentType } from "react";
 import { shallowEqual } from "@raiz/react-simple-store/utils";
-import type {  Reducer } from "./types";
-import type { State , Selector} from '../../src/types'
 import { createStoreRedux } from './create-store-redux'
+import type {  Reducer } from ".";
+import type { State , Selector} from '@raiz/react-simple-store'
 
 const defaultMergeProps = (stateProps : {}, dispatchProps: {}, ownProps: {}) => ({ ...ownProps, ...stateProps, ...dispatchProps }) // correct merge order
 

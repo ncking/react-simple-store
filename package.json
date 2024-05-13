@@ -33,7 +33,7 @@
       "default": "./utils/dist/index.cjs"
     },
     "./redux": {
-      "types": "./redux/dist/index.d.ts",
+      "types": "./redux/dist/redux/src/index.d.ts",
       "module": "./redux/dist/index.module.js",
       "default": "./redux/dist/index.cjs"
     },
