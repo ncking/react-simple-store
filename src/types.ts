@@ -23,7 +23,7 @@ type CreateOptions = {
   state?: State;
 };
 export type CreateStoreApi = (
-  options: CreateOptions 
+  options: CreateOptions
 ) => Record<string, Function>;
 
 export type Options = {

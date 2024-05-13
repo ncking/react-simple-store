@@ -14,20 +14,14 @@ import type {
 } from "./";
 
 export const createStore: CreateStoreApi = (options = {}) => {
-
-  if (typeof options !== 'object') {
-    throw new TypeError(`Expected createStore options to be an object`)
+  if (typeof options !== "object") {
+    throw new TypeError(`Expected createStore options to be an object`);
   }
 
-  const {
-    actions = () => ({}),
-    state: initialState = {},
-  } = options
+  const { actions = () => ({}), state: initialState = {} } = options;
   let isDispatching = false;
   let state: State = { ...initialState }; // clone to stop any external mutations
   const listeners: Set<ListenerCallback> = new Set();
-
-
 
   const setState: SetState = (partial, replace) => {
     if (isDispatching) {
@@ -88,8 +82,8 @@ export const createStore: CreateStoreApi = (options = {}) => {
     addListener(
       args[1]
         ? createSelectorListener(
-          ...(args as [Selector, SelectorCallback, EqualityFn])
-        )
+            ...(args as [Selector, SelectorCallback, EqualityFn])
+          )
         : args[0]
     );
   //
