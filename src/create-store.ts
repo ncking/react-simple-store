@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {
+import type {
   CreateSelectorListnerApi,
   CreateStoreApi,
   EqualityFn,
@@ -11,7 +11,7 @@ import {
   SubscribeApi,
   SubscribeUnbind,
   UseStoreApi,
-} from "./types";
+} from "./";
 
 export const createStore: CreateStoreApi = (options = {}) => {
 
