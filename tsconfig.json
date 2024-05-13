@@ -1,18 +1,12 @@
 {
     "compilerOptions": {
       "strict": true,
-      "target": "esnext",
-      "module": "esnext",
       "moduleResolution": "node",
       "esModuleInterop": true,
-      "skipLibCheck": true,
-      "allowJs": true,
+      "target": "ES2020",
       "jsx": "react",
-      "declaration": true,
-      "outDir": "dist",
-      "forceConsistentCasingInFileNames": true,
-      "experimentalDecorators": true,
-   
+      "jsxFactory": "React.createElement",
+      "jsxFragmentFactory": "React.Fragment",
       "paths" : {
         "@raiz/react-simple-store" : ["./src"],
         "@raiz/react-simple-store/utils" : ["./utils/src"]
