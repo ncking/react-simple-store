@@ -1,4 +1,4 @@
-import type { State } from '../../src/types'
+import type { State } from '@raiz/react-simple-store'
 
 
 export type Reducer = (state: State, action: Action | ActionSimple) => State;
@@ -12,4 +12,3 @@ export interface Action extends ActionSimple {
 }
 
 
-export declare const createStoreRedux: (reducer: Reducer, initialState: State) => Record<string, Function>;
