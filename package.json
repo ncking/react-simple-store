@@ -18,16 +18,25 @@
   "type": "module",
   "sideEffects": false,
   "source": "./src/index.ts",
-  "main": "./src/index.ts",
+  "main": "./dist/index.ts",
   "module": "./dist/index.module.js",
-  "types": "./src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
-      "module": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.module.js",
+      "default": "./dist/index.module.js"
     },
-  
+    "./utils": {
+      "types": "./utils/src/index.d.ts",
+      "module": "./utils/dist/index.module.js",
+      "default": "./utils/dist/index.cjs"
+    },
+    "./redux": {
+      "types": "./redux/dist/index.d.ts",
+      "module": "./redux/dist/index.module.js",
+      "default": "./redux/dist/index.cjs"
+    },
     "./package.json": "./package.json",
     "./redux/package.json": "./redux/package.json",
     "./utils/package.json": "./utils/package.json"
@@ -46,8 +55,8 @@
     "utils/package.json"
   ],
   "scripts": {
-    "build" : "npm run build:core && npm run build:redux && npm run build:utils",
-    "build:core": "microbundle --entry src/index.ts --no-sourcemap --no-generateTypes  --tsconfig ./tsconfig.json -o dist/index.js",
+    "build": "npm run build:core && npm run build:redux && npm run build:utils",
+    "build:core": "microbundle --entry src/index.ts --no-sourcemap --tsconfig ./tsconfig.json -o dist/index.js",
     "build:utils": "microbundle --entry src/index.ts --cwd utils   --no-sourcemap  --jsx React.createElement --tsconfig ./utils/tsconfig.json -o dist/index.js",
     "build:redux": "microbundle  --entry src/index.ts --cwd redux  --no-sourcemap  --jsx React.createElement --tsconfig ./redux/tsconfig.json -o dist/index.js",
     "clean": "shx rm -rf ./dist */dist/ coverage",
