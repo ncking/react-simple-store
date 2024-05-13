@@ -17,7 +17,7 @@
   "bugs": "https://github.com/ncking/react-simple-store/issues",
   "type": "module",
   "sideEffects": false,
-  
+
   "main": "./dist/index.ts",
   "module": "./dist/index.module.js",
   "types": "./dist/index.d.ts",
@@ -28,7 +28,7 @@
       "default": "./dist/index.module.js"
     },
     "./utils": {
-      "types": "./utils/src/index.d.ts",
+      "types": "./utils/dist/index.d.ts",
       "module": "./utils/dist/index.module.js",
       "default": "./utils/dist/index.cjs"
     },
