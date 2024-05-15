@@ -1,9 +1,9 @@
 {
   "name": "redux",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./src/index.ts",
   "module": "./dist/index.module.js",
-  "types": "./dist/redux/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "peerDependencies": {
     "react": "^16.8 || ^17.0 || ^18.0",
     "@raiz/react-simple-store": "file:.."

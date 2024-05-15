@@ -1,7 +1,7 @@
 {
   "name": "utils",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./src/index.ts",
   "module": "./dist/index.module.js",
   "types": "./dist/index.d.ts"
-}
+}  
