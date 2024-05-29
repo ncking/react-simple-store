@@ -1,7 +1,7 @@
 {
   "name": "redux",
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "types": "./dist/index.d.ts",
   "peerDependencies": {
